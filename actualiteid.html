@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualité — Kivu Culture Hub</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">Kivu <span>Culture</span> Hub</a>
+        <ul class="nav-liens">
+            <li><a href="artistes.html">Artistes</a></li>
+            <li><a href="oeuvres.html">Œuvres</a></li>
+            <li><a href="actualites.html" class="actif">Actualités</a></li>
+            <li><a href="index.html#annuaire">Annuaire</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="admin.html" class="nav-btn">Admin</a></li>
+        </ul>
+        <button class="burger" id="burger">☰</button>
+    </div>
+</nav>
+
+<!-- EN-TETE NEWS -->
+<div class="page-entete">
+    <div class="conteneur">
+        <p class="page-breadcrumb">
+            <a href="index.html">Accueil</a> →
+            <a href="actualites.html">Actualités</a> →
+            <span id="news-breadcrumb">Article</span>
+        </p>
+        <div class="news-detail-header">
+            <span class="tag tag-rouge" id="news-tag">Événement</span>
+            <h1 class="page-titre" id="news-titre">Titre de l'actualité</h1>
+            <div class="news-detail-meta">
+                <span id="news-date">14 Mai 2026</span>
+                <span class="news-detail-sep">·</span>
+                <span id="news-auteur">Kivu Culture Hub</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CONTENU NEWS -->
+<section class="section">
+    <div class="conteneur">
+        <div class="news-detail-grille">
+
+            <!-- Texte principal -->
+            <div class="news-detail-corps">
+                <div class="news-detail-visuel" id="news-visuel">
+                    <span class="news-detail-emoji" id="news-emoji">🎪</span>
+                </div>
+                <div class="news-detail-texte" id="news-texte">
+                    Chargement...
+                </div>
+
+                <!-- Navigation entre articles -->
+                <div class="news-detail-nav">
+                    <a href="actualites.html" class="btn-contour">← Retour aux actualités</a>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="news-detail-sidebar">
+                <div class="sidebar-bloc">
+                    <div class="sidebar-titre">Autres actualités</div>
+                    <div id="autres-news">
+                
+                        <!-- rempli par JS -->
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-grille">
+        <div>
+            <div class="footer-logo">Kivu <span>Culture</span> Hub</div>
+            <p class="footer-desc">
+                La plateforme de référence pour promouvoir
+                les artistes et les œuvres culturelles
+                de Bukavu, Sud-Kivu, RDC.
+            </p>
+        </div>
+        <div>
+            <div class="footer-col-titre">Navigation</div>
+            <ul class="footer-liens">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="artistes.html">Artistes</a></li>
+                <li><a href="oeuvres.html">Œuvres</a></li>
+                <li><a href="actualites.html">Actualités</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-col-titre">Catégories</div>
+            <ul class="footer-liens">
+                <li><a href="#">🎨 Artistes</a></li>
+                <li><a href="#">🎪 Événements</a></li>
+                <li><a href="#">🏙 Développement urbain</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-col-titre">Contact</div>
+            <ul class="footer-liens">
+                <li><a href="#">📍 Bukavu, Sud-Kivu</a></li>
+                <li><a href="#">📧 kivuculturehub@gmail.com</a></li>
+                <li><a href="#">📞 +243 972212629</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bas">
+        © 2026 Kivu Culture Hub — Bukavu, Sud-Kivu, RDC
+    </div>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

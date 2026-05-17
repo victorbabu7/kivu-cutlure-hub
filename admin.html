@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — Kivu Culture Hub</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="admin-body">
+
+<!-- ════════════════════════════════════
+     HEADER
+════════════════════════════════════ -->
+<header class="admin-header">
+    <div class="admin-logo">Kivu <span>Culture</span> Hub — Admin</div>
+    <div class="admin-header-droite">
+        <span id="admin-nom-connecte" class="admin-nom-connecte"></span>
+        <a href="index.html" class="admin-back">← Voir le site</a>
+        <button onclick="adminLogout()" class="admin-btn-logout">🚪 Déconnexion</button>
+    </div>
+</header>
+
+<!-- ════════════════════════════════════
+     TABS
+════════════════════════════════════ -->
+<div class="admin-tabs">
+    <div class="admin-tab actif" onclick="adminTab('artistes')">🎨 Artistes</div>
+    <div class="admin-tab" onclick="adminTab('oeuvres')">🖼 Œuvres</div>
+    <div class="admin-tab" onclick="adminTab('news')">📰 Actualités</div>
+    <div class="admin-tab" onclick="adminTab('messages')">✉️ Messages</div>
+    <div class="admin-tab" onclick="adminTab('toplikes')">🏆 Top Likes</div>
+    <div class="admin-tab" onclick="adminTab('admins-comptes')" id="tab-admins-comptes">👥 Admins</div>
+    <div class="admin-tab" onclick="adminTab('mon-compte')">👤 Mon compte</div>
+</div>
+
+
+<div class="admin-panel" id="panel-mon-compte">
+    <div class="admin-panel-titre">Mon compte</div>
+    <p class="admin-panel-desc">Modifier votre email ou mot de passe.</p>
+    <div class="admin-form-bloc" style="max-width:420px;">
+        <div class="admin-form-titre">Changer l'email</div>
+        <div class="admin-form-group">
+            <label>Nouvel email</label>
+            <input type="email" id="compte-email" placeholder="nouveau@email.com">
+        </div>
+        <div class="admin-form-group">
+            <label>Mot de passe actuel</label>
+            <input type="password" id="compte-pass-confirm" placeholder="Confirmez votre mot de passe">
+        </div>
+        <button class="admin-btn-add" onclick="modifierEmail()">Changer l'email</button>
+        <br><br>
+        <div class="admin-form-titre">Changer le mot de passe</div>
+        <div class="admin-form-group">
+            <label>Mot de passe actuel</label>
+            <input type="password" id="compte-ancien-pass" placeholder="Mot de passe actuel">
+        </div>
+        <div class="admin-form-group">
+            <label>Nouveau mot de passe</label>
+            <input type="password" id="compte-new-pass" placeholder="Min. 6 caractères">
+        </div>
+        <button class="admin-btn-add" onclick="modifierMotDePasse()">Changer le mot de passe</button>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════
+     PANEL — ARTISTES
+════════════════════════════════════ -->
+<div class="admin-panel actif" id="panel-artistes">
+    <div class="admin-panel-titre">Gestion des artistes</div>
+    <p class="admin-panel-desc">Ajouter, modifier ou supprimer des artistes de la plateforme.</p>
+
+    <div class="admin-grille">
+
+        <div class="admin-form-bloc">
+            <div class="admin-form-titre">Ajouter un artiste</div>
+
+            <div class="admin-form-group">
+                <label>Nom complet *</label>
+                <input type="text" id="art-nom" placeholder="Ex: Victor Mwendanga">
+            </div>
+
+            <div class="admin-form-group">
+                <label>Filière *</label>
+                <select id="art-filiere">
+                    <option value="">-- Choisir une filière --</option>
+                    <option value="musique">🎵 Musique</option>
+                    <option value="danse">💃 Danse</option>
+                    <option value="theatre">🎭 Théâtre</option>
+                    <option value="peinture">🎨 Peinture</option>
+                    <option value="sculpture">🗿 Sculpture</option>
+                    <option value="cinema">🎬 Cinéma</option>
+                    <option value="artisanat">🏺 Artisanat</option>
+                </select>
+            </div>
+
+            <div class="admin-form-group">
+                <label>Biographie</label>
+                <textarea id="art-bio" placeholder="Description de l'artiste..."></textarea>
+            </div>
+
+            <div class="admin-form-row">
+                <div class="admin-form-group">
+                    <label>Téléphone</label>
+                    <input type="text" id="art-tel" placeholder="+243 XXX XXX XXX">
+                </div>
+                <div class="admin-form-group">
+                    <label>Email</label>
+                    <input type="email" id="art-email" placeholder="artiste@email.com">
+                </div>
+            </div>
+
+            <div class="admin-form-group">
+                <label>Ville</label>
+                <input type="text" id="art-ville" placeholder="Bukavu, Sud-Kivu">
+            </div>
+
+            <div class="admin-form-group">
+                <label>Photo de l'artiste</label>
+                <div class="upload-widget">
+                    <div class="upload-tabs">
+                        <button type="button" class="upload-tab actif" onclick="switchUpload('art','url',this)">🔗 Lien URL</button>
+                        <button type="button" class="upload-tab" onclick="switchUpload('art','file',this)">📂 Fichier local</button>
+                    </div>
+                    <div id="art-upload-url" class="upload-panel">
+                        <input type="text" id="art-photo" placeholder="https://exemple.com/photo.jpg">
+                    </div>
+                    <div id="art-upload-file" class="upload-panel upload-panel-cache">
+                        <div class="upload-dropzone" id="art-dropzone" onclick="document.getElementById('art-file-input').click()">
+                            <span id="art-dropzone-label">📁 Cliquez ou déposez une image ici</span>
+                        </div>
+                        <input type="file" id="art-file-input" accept="image/*" class="upload-input-cache" onchange="handleFileUpload('art', this)">
+                    </div>
+                    <div id="art-photo-preview" class="upload-preview upload-preview-cache">
+                        <img id="art-photo-img" src="" class="upload-preview-img" alt="Aperçu">
+                        <button type="button" onclick="clearUpload('art')" class="upload-clear-btn">✕</button>
+                    </div>
+                </div>
+            </div>
+
+            <button class="admin-btn-add" onclick="adminAjouterArtiste()">+ Ajouter l'artiste</button>
+        </div>
+
+        <div class="admin-liste-bloc">
+            <div class="admin-liste-header">
+                <div class="admin-liste-titre">Artistes enregistrés</div>
+                <div class="admin-liste-count" id="count-artistes">artiste(s)</div>
+            </div>
+            <div class="admin-liste-items" id="liste-artistes">
+                <div class="admin-chargement">Chargement...</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ════════════════════════════════════
+     PANEL — OEUVRES
+════════════════════════════════════ -->
+<div class="admin-panel" id="panel-oeuvres">
+    <div class="admin-panel-titre">Gestion des œuvres</div>
+    <p class="admin-panel-desc">Ajouter, modifier ou supprimer des œuvres culturelles.</p>
+
+    <div class="admin-grille">
+
+        <div class="admin-form-bloc">
+            <div class="admin-form-titre">Ajouter une œuvre</div>
+
+            <div class="admin-form-group">
+                <label>Titre *</label>
+                <input type="text" id="oeu-titre" placeholder="Ex: Kivu Na Moyo">
+            </div>
+
+            <div class="admin-form-group">
+                <label>Type *</label>
+                <select id="oeu-type">
+                    <option value="">-- Type d'œuvre --</option>
+                    <option value="audio">🎵 Audio / Musique</option>
+                    <option value="video">🎬 Vidéo</option>
+                    <option value="peinture">🎨 Peinture</option>
+                    <option value="sculpture">🗿 Sculpture</option>
+                    <option value="photo">📷 Photo</option>
+                    <option value="theatre">🎭 Théâtre</option>
+                </select>
+            </div>
+
+            <div class="admin-form-group">
+                <label>Artiste *</label>
+                <input type="text" id="oeu-artiste" placeholder="Nom de l'artiste">
+            </div>
+
+            <div class="admin-form-group">
+                <label>Année</label>
+                <input type="number" id="oeu-annee" placeholder="2026">
+            </div>
+
+            <div class="admin-form-group">
+                <label>Fichier / Lien média</label>
+                <div class="upload-widget">
+                    <div class="upload-tabs">
+                        <button type="button" class="upload-tab actif" onclick="switchUpload('oeu','url',this)">🔗 Lien URL / YouTube</button>
+                        <button type="button" class="upload-tab" onclick="switchUpload('oeu','file',this)">📂 Fichier local</button>
+                    </div>
+                    <div id="oeu-upload-url" class="upload-panel">
+                        <input type="text" id="oeu-url" placeholder="https://... ou lien YouTube">
+                        <p class="upload-hint">💡 Supporte YouTube, liens audio/vidéo, images</p>
+                    </div>
+                    <div id="oeu-upload-file" class="upload-panel upload-panel-cache">
+                        <div class="upload-dropzone" id="oeu-dropzone" onclick="document.getElementById('oeu-file-input').click()">
+                            <span id="oeu-dropzone-label">📁 Cliquez ou déposez un fichier ici</span>
+                        </div>
+                        <input type="file" id="oeu-file-input" accept="image/*,audio/*,video/*" class="upload-input-cache" onchange="handleFileUpload('oeu', this)">
+                    </div>
+                    <div id="oeu-photo-preview" class="upload-preview upload-preview-cache">
+                        <img id="oeu-photo-img" src="" class="upload-preview-img" alt="Aperçu">
+                        <button type="button" onclick="clearUpload('oeu')" class="upload-clear-btn">✕</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-form-group">
+                <label>Description</label>
+                <textarea id="oeu-desc" placeholder="Description de l'œuvre..."></textarea>
+            </div>
+
+            <button class="admin-btn-add" onclick="adminAjouterOeuvre()">+ Ajouter l'œuvre</button>
+        </div>
+
+        <div class="admin-liste-bloc">
+            <div class="admin-liste-header">
+                <div class="admin-liste-titre">Œuvres enregistrées</div>
+                <div class="admin-liste-count" id="count-oeuvres">0 œuvre(s)</div>
+            </div>
+            <div class="admin-liste-items" id="liste-oeuvres">
+                <div class="admin-chargement">Chargement...</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ════════════════════════════════════
+     PANEL — ACTUALITES
+════════════════════════════════════ -->
+<div class="admin-panel" id="panel-news">
+    <div class="admin-panel-titre">Gestion des actualités</div>
+    <p class="admin-panel-desc">Publier, modifier ou supprimer des actualités culturelles.</p>
+
+    <div class="admin-grille">
+
+        <div class="admin-form-bloc">
+            <div class="admin-form-titre">Publier une actualité</div>
+
+            <div class="admin-form-group">
+                <label>Titre *</label>
+                <input type="text" id="news-titre-admin" placeholder="Titre de l'actualité">
+            </div>
+
+            <div class="admin-form-group">
+                <label>Catégorie *</label>
+                <select id="news-cat">
+                    <option value="artiste">🎨 Artiste</option>
+                    <option value="evenement">🎪 Événement</option>
+                    <option value="urbain">🏙 Développement urbain</option>
+                </select>
+            </div>
+
+            <div class="admin-form-group">
+                <label>Texte *</label>
+                <textarea id="news-texte-admin" class="admin-textarea-tall" placeholder="Contenu de l'actualité..."></textarea>
+            </div>
+
+            <button class="admin-btn-add" onclick="adminAjouterNews()">+ Publier l'actualité</button>
+        </div>
+
+        <div class="admin-liste-bloc">
+            <div class="admin-liste-header">
+                <div class="admin-liste-titre">Actualités publiées</div>
+                <div class="admin-liste-count" id="count-news">0 actualité(s)</div>
+            </div>
+            <div class="admin-liste-items" id="liste-news">
+                <div class="admin-chargement">Chargement...</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ════════════════════════════════════
+     PANEL — MESSAGES
+════════════════════════════════════ -->
+<div class="admin-panel" id="panel-messages">
+    <div class="admin-panel-titre">Messages reçus</div>
+    <p class="admin-panel-desc">Messages envoyés via le formulaire de contact.</p>
+
+    <div class="admin-liste-bloc">
+        <div class="admin-liste-header">
+            <div class="admin-liste-titre">Messages</div>
+            <div class="admin-liste-count" id="count-messages">0 message(s)</div>
+        </div>
+        <div class="admin-liste-items" id="liste-messages">
+            <div class="admin-chargement">Chargement...</div>
+        </div>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════
+     PANEL — TOP LIKES
+════════════════════════════════════ -->
+<div class="admin-panel" id="panel-toplikes">
+    <div class="admin-panel-titre">🏆 Top Likes — Artistes les plus aimés</div>
+    <p class="admin-panel-desc">Classement des artistes selon le nombre de likes reçus.</p>
+
+    <div class="admin-liste-bloc">
+        <div class="admin-liste-header">
+            <div class="admin-liste-titre">Classement</div>
+        </div>
+        <div class="admin-liste-items" id="liste-top-likes">
+            <div class="admin-chargement">Cliquez sur l'onglet pour charger...</div>
+        </div>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════
+     PANEL — GESTION DES ADMINS
+════════════════════════════════════ -->
+<div class="admin-panel" id="panel-admins-comptes">
+    <div class="admin-panel-titre">👥 Gestion des comptes administrateurs</div>
+    <p class="admin-panel-desc">Créez des comptes admins et gérez les accès. Seul le Super Admin peut accéder à cette section.</p>
+
+    <div class="admin-grille">
+
+        <div class="admin-form-bloc">
+            <div class="admin-form-titre">Créer un compte admin</div>
+
+            <div class="admin-form-group">
+                <label>Nom complet *</label>
+                <input type="text" id="new-admin-nom" placeholder="Ex: Jean Kalumba">
+            </div>
+            <div class="admin-form-group">
+                <label>Email *</label>
+                <input type="email" id="new-admin-email" placeholder="jean@kivuculturehub.cd">
+            </div>
+            <div class="admin-form-group">
+                <label>Nom d'utilisateur *</label>
+                <p class="admin-label-hint">Utilisé pour se connecter</p>
+                <input type="text" id="new-admin-username" placeholder="jean.kalumba">
+            </div>
+            <div class="admin-form-group">
+                <label>Mot de passe *</label>
+                <p class="admin-label-hint">Minimum 6 caractères</p>
+                <input type="password" id="new-admin-pass" placeholder="••••••••">
+            </div>
+            <div class="admin-form-group">
+                <label>Mot de sécurité *</label>
+                <p class="admin-label-hint">Utilisé pour récupérer le mot de passe</p>
+                <input type="text" id="new-admin-mot-sec" placeholder="Ex: Bukavu2026">
+            </div>
+
+            <div class="admin-info-bloc admin-info-jaune">
+                🛡 Les admins créés ont les mêmes droits que vous, <strong>sauf</strong> qu'ils ne peuvent pas modifier ou supprimer des comptes administrateurs.
+            </div>
+
+            <button class="admin-btn-add" onclick="adminAjouterAdmin()">+ Créer le compte admin</button>
+        </div>
+
+        <div class="admin-liste-bloc">
+            <div class="admin-liste-header">
+                <div class="admin-liste-titre">Comptes administrateurs</div>
+                <div class="admin-liste-count" id="count-admins">0 compte(s)</div>
+            </div>
+            <div class="admin-info-bloc admin-info-bleu">
+                👑 = Super Admin &nbsp;·&nbsp; 🛡 = Admin standard<br>
+                <em>Vous ne pouvez pas supprimer un Super Admin ni votre propre compte.</em>
+            </div>
+            <div class="admin-liste-items" id="liste-admins">
+                <div class="admin-chargement">Chargez l'onglet pour afficher...</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- TOAST -->
+<div class="admin-toast" id="admin-toast"></div>
+
+<!-- ════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════ -->
+<script>
+function switchUpload(prefix, mode, btn) {
+    btn.closest('.upload-tabs').querySelectorAll('.upload-tab').forEach(t => t.classList.remove('actif'));
+    btn.classList.add('actif');
+    document.getElementById(prefix + '-upload-url').classList.toggle('upload-panel-cache', mode !== 'url');
+    document.getElementById(prefix + '-upload-file').classList.toggle('upload-panel-cache', mode !== 'file');
+}
+
+function handleFileUpload(prefix, input) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const dataUrl = e.target.result;
+        const urlInput = document.getElementById(prefix + '-photo') || document.getElementById(prefix + '-url');
+        if (urlInput) urlInput.dataset.fileData = dataUrl;
+        const label = document.getElementById(prefix + '-dropzone-label');
+        if (label) label.textContent = '✅ ' + file.name;
+        if (file.type.startsWith('image/')) {
+            const preview = document.getElementById(prefix + '-photo-preview');
+            const img     = document.getElementById(prefix + '-photo-img');
+            if (preview && img) { img.src = dataUrl; preview.classList.remove('upload-preview-cache'); }
+        }
+    };
+    reader.readAsDataURL(file);
+}
+
+function clearUpload(prefix) {
+    const urlInput = document.getElementById(prefix + '-photo') || document.getElementById(prefix + '-url');
+    if (urlInput) { urlInput.value = ''; urlInput.dataset.fileData = ''; }
+    const label = document.getElementById(prefix + '-dropzone-label');
+    if (label) label.textContent = '📁 Cliquez ou déposez un fichier ici';
+    const preview = document.getElementById(prefix + '-photo-preview');
+    if (preview) preview.classList.add('upload-preview-cache');
+    const fi = document.getElementById(prefix + '-file-input');
+    if (fi) fi.value = '';
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    ['art','oeu'].forEach(prefix => {
+        const dz = document.getElementById(prefix + '-dropzone');
+        if (!dz) return;
+        dz.addEventListener('dragover',  e => { e.preventDefault(); dz.classList.add('dragover'); });
+        dz.addEventListener('dragleave', () => dz.classList.remove('dragover'));
+        dz.addEventListener('drop', e => {
+            e.preventDefault(); dz.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (!file) return;
+            const inp = document.getElementById(prefix + '-file-input');
+            if (inp) {
+                const dt = new DataTransfer(); dt.items.add(file);
+                inp.files = dt.files;
+                handleFileUpload(prefix, inp);
+            }
+        });
+    });
+
+    const origArt = window.adminAjouterArtiste;
+    if (origArt) window.adminAjouterArtiste = async function() {
+        const p = document.getElementById('art-photo');
+        if (p && p.dataset.fileData) p.value = p.dataset.fileData;
+        return origArt();
+    };
+    const origOeu = window.adminAjouterOeuvre;
+    if (origOeu) window.adminAjouterOeuvre = async function() {
+        const p = document.getElementById('oeu-url');
+        if (p && p.dataset.fileData) p.value = p.dataset.fileData;
+        return origOeu();
+    };
+});
+</script>
+
+<script type="module" src="js/main.js"></script>
+
+</body>
+</html>

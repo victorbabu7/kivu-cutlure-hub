@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Espace Artiste — Kivu Culture Hub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body{min-height:100vh;background:#f5f3ef;}
+        .ea-header{background:#1a1a1a;color:#fff;padding:0 5vw;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+        .ea-logo{font-size:1rem;font-weight:700;color:#fff;}
+        .ea-logo span{color:#c0392b;}
+        .ea-header-droite{display:flex;align-items:center;gap:1rem;}
+        .ea-nom{font-size:0.85rem;color:#ccc;}
+        .ea-logout{background:none;border:1px solid #444;color:#ccc;padding:0.35rem 0.8rem;font-size:0.8rem;cursor:pointer;transition:all 0.2s;}
+        .ea-logout:hover{border-color:#fff;color:#fff;}
+        .ea-body{max-width:900px;margin:0 auto;padding:2rem 5vw;}
+        .ea-titre{font-size:1.5rem;font-weight:800;color:#1a1a1a;margin-bottom:0.3rem;}
+        .ea-titre span{color:#c0392b;}
+        .ea-desc{color:#666;font-size:0.9rem;margin-bottom:2rem;}
+        .ea-statut{padding:0.6rem 1rem;border-radius:6px;font-size:0.85rem;font-weight:600;display:inline-block;margin-bottom:1.5rem;}
+        .ea-statut.approuve{background:#eafaf1;color:#1e8449;border:1px solid #a9dfbf;}
+        .ea-statut.attente{background:#fef9e7;color:#7d6608;border:1px solid #f9e79f;}
+        .ea-grille{display:grid;grid-template-columns:380px 1fr;gap:2rem;align-items:start;}
+        .ea-form-bloc{background:#fff;border:1px solid #e8e4de;padding:1.5rem;border-radius:8px;}
+        .ea-form-titre{font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin-bottom:1.2rem;padding-bottom:0.8rem;border-bottom:1px solid #e8e4de;}
+        .ea-group{margin-bottom:0.9rem;}
+        .ea-group label{display:block;font-size:0.78rem;font-weight:600;color:#444;margin-bottom:0.3rem;text-transform:uppercase;letter-spacing:0.05em;}
+        .ea-group input,.ea-group select,.ea-group textarea{width:100%;padding:0.65rem 0.9rem;border:1.5px solid #e0e0e0;border-radius:6px;font-size:0.9rem;outline:none;transition:border-color 0.2s;box-sizing:border-box;background:#fafafa;font-family:inherit;}
+        .ea-group input:focus,.ea-group select:focus,.ea-group textarea:focus{border-color:#c0392b;background:#fff;}
+        .ea-group textarea{min-height:80px;resize:vertical;}
+        .ea-btn{width:100%;padding:0.8rem;background:#c0392b;color:#fff;border:none;border-radius:6px;font-size:0.88rem;font-weight:700;cursor:pointer;transition:background 0.2s;margin-top:0.3rem;}
+        .ea-btn:hover{background:#a93226;}
+        .ea-info{background:#f0f7ff;border:1px solid #bee0fd;border-radius:6px;padding:0.7rem 0.9rem;font-size:0.82rem;color:#1a4a72;margin-bottom:1rem;}
+        .ea-liste-bloc{background:#fff;border:1px solid #e8e4de;border-radius:8px;}
+        .ea-liste-header{padding:1rem 1.2rem;border-bottom:1px solid #e8e4de;display:flex;justify-content:space-between;align-items:center;}
+        .ea-liste-titre{font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#888;}
+        .ea-liste-count{font-size:0.75rem;color:#c0392b;font-weight:600;}
+        .ea-item{padding:1rem 1.2rem;border-bottom:1px solid #f0ede8;display:flex;justify-content:space-between;align-items:flex-start;}
+        .ea-item:last-child{border-bottom:none;}
+        .ea-item-nom{font-weight:700;font-size:0.92rem;color:#1a1a1a;margin-bottom:0.2rem;}
+        .ea-item-meta{font-size:0.78rem;color:#888;}
+        .ea-item-statut{font-size:0.72rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:4px;}
+        .ea-item-statut.approuve{background:#eafaf1;color:#1e8449;}
+        .ea-item-statut.attente{background:#fef9e7;color:#7d6608;}
+        .ea-item-statut.rejete{background:#fdecea;color:#c0392b;}
+        .ea-btn-delete{background:none;border:1px solid #e8e4de;color:#c0392b;padding:0.3rem 0.7rem;font-size:0.75rem;cursor:pointer;border-radius:4px;transition:all 0.2s;}
+        .ea-btn-delete:hover{background:#c0392b;color:#fff;}
+        .ea-vide{padding:2.5rem;text-align:center;color:#bbb;font-size:0.9rem;}
+        .ea-chargement{padding:1.5rem;text-align:center;color:#bbb;}
+        .ea-toast{position:fixed;bottom:2rem;right:2rem;background:#1a1a1a;color:#fff;padding:0.8rem 1.5rem;font-size:0.85rem;border-radius:6px;opacity:0;transform:translateY(10px);transition:all 0.3s;pointer-events:none;z-index:999;}
+        .ea-toast.show{opacity:1;transform:translateY(0);}
+        .ea-attente-msg{background:#fff;border:1px solid #e8e4de;border-radius:8px;padding:2.5rem;text-align:center;}
+        .ea-attente-msg .ea-icon{font-size:3rem;margin-bottom:1rem;}
+        .ea-attente-msg h2{font-size:1.2rem;font-weight:700;color:#1a1a1a;margin-bottom:0.5rem;}
+        .ea-attente-msg p{color:#666;font-size:0.9rem;line-height:1.6;}
+        @media(max-width:700px){.ea-grille{grid-template-columns:1fr;}}
+    </style>
+</head>
+<body>
+<header class="ea-header">
+    <div class="ea-logo">Kivu <span>Culture</span> Hub — <span>Mon Espace</span></div>
+    <div class="ea-header-droite">
+        <span class="ea-nom" id="ea-nom-artiste"></span>
+        <button class="ea-logout" onclick="artisteLogout()">Déconnexion</button>
+    </div>
+</header>
+
+<div class="ea-body">
+    <div class="ea-titre">Mon <span>Espace Artiste</span></div>
+    <p class="ea-desc">Gérez vos œuvres et votre profil sur Kivu Culture Hub.</p>
+
+    <!-- Affiché si compte en attente -->
+    <div id="ea-attente-bloc" style="display:none;">
+        <div class="ea-attente-msg">
+            <div class="ea-icon">⏳</div>
+            <h2>Votre compte est en attente de validation</h2>
+            <p>L'administration examine votre demande. Vous serez notifié par email une fois votre compte approuvé. Merci de votre patience.</p>
+        </div>
+    </div>
+
+    <!-- Affiché si compte approuvé -->
+    <div id="ea-contenu" style="display:none;">
+        <div id="ea-statut-badge"></div>
+        <div class="ea-grille">
+
+            <div class="ea-form-bloc">
+                <div class="ea-form-titre">Déposer une œuvre</div>
+                <div class="ea-info">
+                    📋 Chaque œuvre déposée sera <strong>examinée par l'admin</strong> avant d'être publiée.
+                </div>
+                <div class="ea-group">
+                    <label>Titre *</label>
+                    <input type="text" id="oa-titre" placeholder="Ex: Kivu Na Moyo">
+                </div>
+                <div class="ea-group">
+                    <label>Type *</label>
+                    <select id="oa-type">
+                        <option value="">-- Type d'œuvre --</option>
+                        <option value="audio">🎵 Audio / Musique</option>
+                        <option value="video">🎬 Vidéo</option>
+                        <option value="peinture">🎨 Peinture</option>
+                        <option value="sculpture">🗿 Sculpture</option>
+                        <option value="photo">📷 Photo</option>
+                        <option value="theatre">🎭 Théâtre</option>
+                    </select>
+                </div>
+                <div class="ea-group">
+                    <label>Année</label>
+                    <input type="number" id="oa-annee" placeholder="2026">
+                </div>
+                <div class="ea-group">
+                    <label>URL du fichier / Lien</label>
+                    <input type="text" id="oa-url" placeholder="https://... ou lien YouTube">
+                </div>
+                <div class="ea-group">
+                    <label>Description</label>
+                    <textarea id="oa-desc" placeholder="Décrivez cette œuvre..."></textarea>
+                </div>
+                <button class="ea-btn" onclick="deposerOeuvre()">+ Déposer l'œuvre</button>
+            </div>
+
+            <div class="ea-liste-bloc">
+                <div class="ea-liste-header">
+                    <div class="ea-liste-titre">Mes œuvres</div>
+                    <div class="ea-liste-count" id="ea-count-oeuvres">0 œuvre(s)</div>
+                </div>
+                <div id="ea-liste-oeuvres">
+                    <div class="ea-chargement">Chargement...</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="ea-toast" id="ea-toast"></div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

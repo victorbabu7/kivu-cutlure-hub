@@ -1,12 +1,201 @@
 <!DOCTYPE html>
-<html>
-    <head>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Artiste — Kivu Culture Hub</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════ -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">Kivu <span>Culture</span> Hub</a>
+        <ul class="nav-liens">
+            <li><a href="artistes.html" class="actif">Artistes</a></li>
+            <li><a href="oeuvres.html">Œuvres</a></li>
+            <li><a href="actualites.html">Actualités</a></li>
+            <li><a href="index.html#annuaire">Annuaire</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="admin.html" class="nav-btn">Admin</a></li>
+        </ul>
+        <button class="burger" id="burger">☰</button>
+    </div>
+</nav>
+
+<!-- ════════════════════════════════════
+     PROFIL HERO
+════════════════════════════════════ -->
+<section class="profil-hero">
+    <div class="conteneur">
+        <p class="page-breadcrumb">
+            <a href="index.html">Accueil</a> → 
+            <a href="artistes.html">Artistes</a> → 
+            <span id="profil-nom-breadcrumb">Victor Mwendanga</span>
+        </p>
+
+        <div class="profil-hero-inner">
+
+            <!-- Photo -->
+            <div class="profil-photo-wrapper">
+                <div class="profil-photo photo-bg-1" id="profil-photo">
+                    🎵
+                </div>
+                <button class="profil-like-btn" id="profil-like-btn">
+                    ❤ <span id="profil-likes">42</span> likes
+                </button>
+            </div>
+
+            <!-- Infos principales -->
+            <div class="profil-infos">
+                <span class="tag tag-rouge" id="profil-filiere-tag">Musique</span>
+                <h1 class="profil-nom" id="profil-nom">Victor Mwendanga</h1>
+                <p class="profil-ville" id="profil-ville">📍 Bukavu, Sud-Kivu, RDC</p>
+
+                <div class="profil-bio" id="profil-bio">
+                    Musicien talentueux spécialisé dans la musique urbaine 
+                    et traditionnelle du Kivu. Victor fusionne les rythmes 
+                    traditionnels congolais avec des sonorités modernes pour 
+                    créer une musique unique qui célèbre la culture du Sud-Kivu.
+                    Avec plus de 10 ans d'expérience sur scène, il est l'une 
+                    des figures incontournables de la scène musicale de Bukavu.
+                </div>
+
+                <!-- Contacts -->
+                <div class="profil-contacts">
+                    <div class="profil-contact-item" id="profil-tel">
+                        <span class="profil-contact-icone">📞</span>
+                        <span>+243974432838</span>
+                    </div>
+                    <div class="profil-contact-item" id="profil-email">
+                        <span class="profil-contact-icone">📧</span>
+                        <span>mwendangababu@gmail.com</span>
+                    </div>
+                    <div class="profil-contact-item" id="profil-adresse">
+                        <span class="profil-contact-icone">📍</span>
+                        <span>Bukavu, Sud-Kivu</span>
+                    </div>
+                </div>
+
+                <!-- Bouton contacter -->
+                <a href="#contacter" class="btn-rouge" style="display:inline-block; margin-top:1.5rem;">
+                    Contacter cet artiste
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
 
 
-    </head>
-    <body>
+<section class="section" id="oeuvres-artiste">
+    <div class="conteneur">
+        <div class="section-entete reveal">
+            <div>
+                <h2 class="section-titre">Ses <span>œuvres</span></h2>
+                <div class="separateur"></div>
+            </div>
+        </div>
 
-    </body>
-    
-    </html>
+        <div class="profil-oeuvres-grille" id="profil-oeuvres-grille">
 
+          
+
+        </div>
+    </div>
+</section>
+
+
+<section class="section section-gris" id="contacter">
+    <div class="conteneur">
+        <div class="profil-contact-grille">
+
+            <div class="reveal">
+                <h2 class="section-titre">Contacter <span>l'artiste</span></h2>
+                <div class="separateur"></div>
+                <p class="contact-desc">
+                    Vous souhaitez collaborer avec cet artiste, 
+                    l'inviter à un événement ou simplement lui 
+                    laisser un message ? Écrivez-lui directement.
+                </p>
+                <div class="contact-info-liste">
+                    <div class="contact-info-item">
+                        <span class="contact-icone">📞</span>
+                        <span class="contact-icone-texte" id="contact-tel">+243 XXX XXX XXX</span>
+                    </div>
+                    <div class="contact-info-item">
+                        <span class="contact-icone">📧</span>
+                        <span class="contact-icone-texte" id="contact-email-affich">victor@email.com</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reveal reveal-delay-2">
+                <div class="contact-form">
+                    <input type="text"  id="msg-nom"     placeholder="Votre nom">
+                    <input type="email" id="msg-email"   placeholder="Votre email">
+                    <input type="text"  id="msg-sujet"   placeholder="Sujet">
+                    <textarea           id="msg-message" placeholder="Votre message..."></textarea>
+                    <button class="btn-rouge" onclick="envoyerMessageArtiste()">
+                        Envoyer le message
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<footer class="footer">
+    <div class="footer-grille">
+        <div>
+            <div class="footer-logo">Kivu <span>Culture</span> Hub</div>
+            <p class="footer-desc">
+                La plateforme de référence pour promouvoir 
+                les artistes et les œuvres culturelles 
+                de Bukavu, Sud-Kivu, RDC.
+            </p>
+        </div>
+        <div>
+            <div class="footer-col-titre">Navigation</div>
+            <ul class="footer-liens">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="artistes.html">Artistes</a></li>
+                <li><a href="oeuvres.html">Œuvres</a></li>
+                <li><a href="actualites.html">Actualités</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-col-titre">Filières</div>
+            <ul class="footer-liens">
+                <li><a href="#">🎵 Musique</a></li>
+                <li><a href="#">💃 Danse</a></li>
+                <li><a href="#">🎭 Théâtre</a></li>
+                <li><a href="#">🎨 Peinture</a></li>
+                <li><a href="#">🗿 Sculpture</a></li>
+                <li><a href="#">🏺 Artisanat</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-col-titre">Contact</div>
+            <ul class="footer-liens">
+                <li><a href="#">📍 Bukavu, Sud-Kivu</a></li>
+                <li><a href="#">📧 contact@kivuculturehub.cd</a></li>
+                <li><a href="#">📞 +243 972212629</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bas">
+        © 2026 Kivu Culture Hub — Bukavu, Sud-Kivu, RDC
+    </div>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+
+</body>
+</html>

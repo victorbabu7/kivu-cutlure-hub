@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion Admin — Kivu Culture Hub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { min-height:100vh; background:#f5f3ef; display:flex; flex-direction:column; }
+        .login-topbar { background:#fff; border-bottom:1px solid #e8e4de; padding:1rem 5vw; display:flex; justify-content:space-between; align-items:center; }
+        .login-topbar-logo { font-size:1.3rem; font-weight:800; color:#1a1a1a; text-decoration:none; }
+        .login-topbar-logo span { color:#c0392b; }
+        .login-topbar-retour { font-size:0.85rem; color:#c0392b; text-decoration:none; font-weight:600; }
+        .login-topbar-retour:hover { text-decoration:underline; }
+        .login-page-body { flex:1; display:flex; align-items:center; justify-content:center; padding:3rem 1rem; }
+        .login-container { width:100%; max-width:440px; }
+        .login-card { background:#fff; border-radius:16px; padding:2.5rem 2rem; box-shadow:0 4px 24px rgba(0,0,0,0.08); border:1px solid #e8e4de; }
+        .login-icon { text-align:center; font-size:2.5rem; margin-bottom:0.5rem; }
+        .login-titre { font-size:1.5rem; font-weight:800; text-align:center; color:#1a1a1a; margin-bottom:0.25rem; }
+        .login-titre span { color:#c0392b; }
+        .login-sous-titre { text-align:center; color:#666; font-size:0.88rem; margin-bottom:1.8rem; }
+        .login-group { margin-bottom:1rem; }
+        .login-group label { display:block; font-size:0.83rem; font-weight:600; color:#333; margin-bottom:0.35rem; }
+        .login-group input { width:100%; padding:0.72rem 1rem; border:1.5px solid #e0e0e0; border-radius:8px; font-size:0.95rem; outline:none; transition:border-color 0.2s; box-sizing:border-box; background:#fafafa; }
+        .login-group input:focus { border-color:#c0392b; background:#fff; }
+        .login-btn { width:100%; padding:0.85rem; background:#c0392b; color:#fff; border:none; border-radius:8px; font-size:1rem; font-weight:700; cursor:pointer; margin-top:0.5rem; transition:background 0.2s; }
+        .login-btn:hover:not(:disabled) { background:#a93226; }
+        .login-btn:disabled { opacity:0.6; cursor:not-allowed; }
+        .login-erreur { display:none; background:#fdecea; color:#c0392b; border:1px solid #f5c6c0; border-radius:8px; padding:0.6rem 1rem; font-size:0.85rem; margin-top:0.75rem; text-align:center; }
+        .login-oublie { text-align:center; margin-top:1rem; font-size:0.83rem; }
+        .login-oublie a { color:#c0392b; text-decoration:none; font-weight:600; cursor:pointer; }
+        .login-oublie a:hover { text-decoration:underline; }
+        .recup-bloc { display:none; margin-top:1.5rem; border-top:1.5px solid #e8e4de; padding-top:1.2rem; }
+        .recup-titre { font-size:0.95rem; font-weight:700; color:#1a1a1a; margin-bottom:1rem; }
+        .recup-msg { font-size:0.83rem; margin-top:0.75rem; min-height:1.2rem; }
+        .recup-reset-bloc { display:none; margin-top:0.8rem; }
+        .login-sep { border:none; border-top:1px solid #e8e4de; margin:1.2rem 0; }
+    </style>
+</head>
+<body>
+<div class="login-topbar">
+    <a href="index.html" class="login-topbar-logo">Kivu <span>Culture</span> Hub</a>
+    <a href="index.html" class="login-topbar-retour">← Retour au site</a>
+</div>
+<div class="login-page-body">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-icon">🔐</div>
+            <div class="login-titre">Espace <span>Admin</span></div>
+            <div class="login-sous-titre">Connectez-vous pour accéder au panneau d'administration</div>
+
+            <div id="login-form">
+                <div class="login-group">
+                    <label for="login-email">Email ou nom d'utilisateur</label>
+                    <input type="text" id="login-email" placeholder="Votre email ou username" autocomplete="username">
+                </div>
+                <div class="login-group">
+                    <label for="login-pass">Mot de passe</label>
+                    <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password">
+                </div>
+                <button class="login-btn" onclick="adminLogin()">Se connecter →</button>
+                <div class="login-erreur" id="login-erreur"></div>
+            </div>
+
+            <div class="login-oublie">
+                <a onclick="afficherRecup()">🔑 Mot de passe oublié ?</a>
+            </div>
+
+            <div class="recup-bloc" id="recup-bloc">
+                <div class="recup-titre">🔒 Récupération par mot de sécurité</div>
+                <div class="login-group">
+                    <label>Email du compte</label>
+                    <input type="email" id="recup-email" placeholder="votre@email.com">
+                </div>
+                <div class="login-group">
+                    <label>Mot de sécurité</label>
+                    <input type="text" id="recup-mot-sec" placeholder="Votre mot de sécurité">
+                </div>
+                <button class="login-btn" onclick="verifierMotSecurite()" style="margin-top:0;">Vérifier →</button>
+                <div class="recup-reset-bloc" id="recup-reset-bloc">
+                    <hr class="login-sep">
+                    <div class="login-group">
+                        <label>Nouveau mot de passe</label>
+                        <input type="password" id="recup-new-pass" placeholder="Min. 6 caractères">
+                    </div>
+                    <button class="login-btn" onclick="reinitialiserMotDePasse()">✅ Réinitialiser</button>
+                </div>
+                <div class="recup-msg" id="recup-msg"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

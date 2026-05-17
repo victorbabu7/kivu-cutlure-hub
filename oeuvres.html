@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Œuvres — Kivu Culture Hub</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════ -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">Kivu <span>Culture</span> Hub</a>
+        <ul class="nav-liens">
+            <li><a href="artistes.html">Artistes</a></li>
+            <li><a href="oeuvres.html" class="actif">Œuvres</a></li>
+            <li><a href="actualites.html">Actualités</a></li>
+            <li><a href="index.html#annuaire">Annuaire</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="admin.html" class="nav-btn">Admin</a></li>
+        </ul>
+        <button class="burger" id="burger">☰</button>
+    </div>
+</nav>
+
+<!-- ════════════════════════════════════
+     EN-TETE PAGE
+════════════════════════════════════ -->
+<div class="page-entete">
+    <div class="conteneur">
+        <div class="page-entete-inner">
+            <div>
+                <p class="page-breadcrumb">
+                    <a href="index.html">Accueil</a> → Œuvres
+                </p>
+                <h1 class="page-titre">
+                    Nos <span>Œuvres</span>
+                </h1>
+                <p class="page-desc">
+                    Musiques, vidéos, peintures, sculptures et bien plus encore.
+                    Découvrez toutes les créations des artistes de Bukavu.
+                </p>
+            </div>
+            <div class="page-stats">
+                <div class="page-stat">
+                    <span class="page-stat-num"> </span>
+                    <span class="page-stat-label">Œuvres</span>
+                </div>
+                <div class="page-stat">
+                    <span class="page-stat-num"> </span>
+                    <span class="page-stat-label">Types</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════
+     FILTRES
+════════════════════════════════════ -->
+<div class="filtres-barre">
+    <div class="conteneur">
+        <div class="filtres-inner">
+            <div class="filtre-recherche">
+                <span class="filtre-recherche-icone">🔍</span>
+                <input
+                    type="text"
+                    id="recherche-oeuvre"
+                    placeholder="Rechercher une œuvre..."
+                    class="filtre-input"
+                >
+            </div>
+            <div class="filtres-filieres">
+                <button class="filtre-btn actif" data-type="tous">Tous</button>
+                <button class="filtre-btn" data-type="audio">🎵 Audio</button>
+                <button class="filtre-btn" data-type="video">🎬 Vidéo</button>
+                <button class="filtre-btn" data-type="peinture">🎨 Peinture</button>
+                <button class="filtre-btn" data-type="sculpture">🗿 Sculpture</button>
+                <button class="filtre-btn" data-type="photo">📷 Photo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════
+     GRILLE OEUVRES
+════════════════════════════════════ -->
+<section class="artistes-section">
+    <div class="conteneur">
+
+        <div class="vide" id="vide" style="display:none;">
+            <span style="font-size:3rem;">🎨</span>
+            <p>Aucune œuvre trouvée.</p>
+        </div>
+
+        <div class="oeuvres-grille-page" id="oeuvres-grille">
+
+            
+
+        </div>
+    </div>
+</section>
+
+
+<footer class="footer">
+    <div class="footer-grille">
+        <div>
+            <div class="footer-logo">Kivu <span>Culture</span> Hub</div>
+            <p class="footer-desc">
+                La plateforme de référence pour promouvoir
+                les artistes et les œuvres culturelles
+                de Bukavu, Sud-Kivu, RDC.
+            </p>
+        </div>
+        <div>
+            <div class="footer-col-titre">Navigation</div>
+            <ul class="footer-liens">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="artistes.html">Artistes</a></li>
+                <li><a href="oeuvres.html">Œuvres</a></li>
+                <li><a href="actualites.html">Actualités</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-col-titre">Types d'œuvres</div>
+            <ul class="footer-liens">
+                <li><a href="#">🎵 Audio</a></li>
+                <li><a href="#">🎬 Vidéo</a></li>
+                <li><a href="#">🎨 Peinture</a></li>
+                <li><a href="#">🗿 Sculpture</a></li>
+                <li><a href="#">📷 Photo</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-col-titre">Contact</div>
+            <ul class="footer-liens">
+                <li><a href="#">📍 Bukavu, Sud-Kivu</a></li>
+                <li><a href="#">📧 contact@kivuculturehub.cd</a></li>
+                <li><a href="#">📞 +243 XXX XXX XXX</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bas">
+        © 2026 Kivu Culture Hub — Bukavu, Sud-Kivu, RDC
+    </div>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+
+</body>
+</html>

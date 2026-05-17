@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription Artiste — Kivu Culture Hub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body{min-height:100vh;background:#f5f3ef;display:flex;flex-direction:column;}
+        .ins-topbar{background:#fff;border-bottom:1px solid #e8e4de;padding:1rem 5vw;display:flex;justify-content:space-between;align-items:center;}
+        .ins-logo{font-size:1.2rem;font-weight:800;color:#1a1a1a;text-decoration:none;}
+        .ins-logo span{color:#c0392b;}
+        .ins-back{font-size:0.85rem;color:#c0392b;text-decoration:none;font-weight:600;}
+        .ins-body{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:2rem 1rem;}
+        .ins-container{width:100%;max-width:560px;}
+        .ins-card{background:#fff;border-radius:12px;padding:2rem 1.8rem;box-shadow:0 4px 24px rgba(0,0,0,0.07);border:1px solid #e8e4de;}
+        .ins-titre{font-size:1.4rem;font-weight:800;color:#1a1a1a;margin-bottom:0.2rem;}
+        .ins-titre span{color:#c0392b;}
+        .ins-desc{color:#666;font-size:0.88rem;margin-bottom:1.5rem;line-height:1.6;}
+        .ins-group{margin-bottom:0.9rem;}
+        .ins-group label{display:block;font-size:0.8rem;font-weight:600;color:#444;margin-bottom:0.3rem;letter-spacing:0.05em;text-transform:uppercase;}
+        .ins-group input,.ins-group select,.ins-group textarea{width:100%;padding:0.65rem 0.9rem;border:1.5px solid #e0e0e0;border-radius:6px;font-size:0.92rem;outline:none;transition:border-color 0.2s;box-sizing:border-box;background:#fafafa;font-family:inherit;}
+        .ins-group input:focus,.ins-group select:focus,.ins-group textarea:focus{border-color:#c0392b;background:#fff;}
+        .ins-group textarea{min-height:90px;resize:vertical;}
+        .ins-row{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;}
+        .ins-btn{width:100%;padding:0.85rem;background:#c0392b;color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:0.5rem;transition:background 0.2s;}
+        .ins-btn:hover:not(:disabled){background:#a93226;}
+        .ins-btn:disabled{opacity:0.6;cursor:not-allowed;}
+        .ins-erreur{display:none;background:#fdecea;color:#c0392b;border:1px solid #f5c6c0;border-radius:6px;padding:0.6rem 1rem;font-size:0.85rem;margin-top:0.75rem;}
+        .ins-succes{display:none;background:#eafaf1;color:#1e8449;border:1px solid #a9dfbf;border-radius:6px;padding:1rem;font-size:0.9rem;margin-top:0.75rem;text-align:center;}
+        .ins-info{background:#f0f7ff;border:1px solid #bee0fd;border-radius:6px;padding:0.8rem 1rem;font-size:0.82rem;color:#1a4a72;margin-bottom:1.2rem;line-height:1.6;}
+        .ins-sep{border:none;border-top:1px solid #e8e4de;margin:1.2rem 0;}
+        @media(max-width:480px){.ins-row{grid-template-columns:1fr;}}
+    </style>
+</head>
+<body>
+<div class="ins-topbar">
+    <a href="index.html" class="ins-logo">Kivu <span>Culture</span> Hub</a>
+    <a href="index.html" class="ins-back">← Retour au site</a>
+</div>
+<div class="ins-body">
+    <div class="ins-container">
+        <div class="ins-card">
+            <div class="ins-titre">Rejoindre <span>Kivu Culture Hub</span></div>
+            <p class="ins-desc">Créez votre profil d'artiste et partagez vos œuvres avec le monde. Votre demande sera examinée par notre équipe.</p>
+
+            <div class="ins-info">
+                📋 Après l'inscription, votre demande sera <strong>en attente de validation</strong> par l'administration. Vous recevrez un accès à votre espace artiste une fois approuvé.
+            </div>
+
+            <div id="ins-form">
+                <div class="ins-group">
+                    <label>Nom complet *</label>
+                    <input type="text" id="ins-nom" placeholder="Votre nom et prénom">
+                </div>
+                <div class="ins-row">
+                    <div class="ins-group">
+                        <label>Email *</label>
+                        <input type="email" id="ins-email" placeholder="votre@email.com">
+                    </div>
+                    <div class="ins-group">
+                        <label>Téléphone</label>
+                        <input type="text" id="ins-tel" placeholder="+243 XXX XXX XXX">
+                    </div>
+                </div>
+                <div class="ins-row">
+                    <div class="ins-group">
+                        <label>Filière artistique *</label>
+                        <select id="ins-filiere">
+                            <option value="">-- Choisir --</option>
+                            <option value="musique">🎵 Musique</option>
+                            <option value="danse">💃 Danse</option>
+                            <option value="theatre">🎭 Théâtre</option>
+                            <option value="peinture">🎨 Peinture</option>
+                            <option value="sculpture">🗿 Sculpture</option>
+                            <option value="cinema">🎬 Cinéma</option>
+                            <option value="artisanat">🏺 Artisanat</option>
+                        </select>
+                    </div>
+                    <div class="ins-group">
+                        <label>Ville *</label>
+                        <input type="text" id="ins-ville" placeholder="Bukavu, Sud-Kivu">
+                    </div>
+                </div>
+                <div class="ins-group">
+                    <label>Biographie *</label>
+                    <textarea id="ins-bio" placeholder="Décrivez votre parcours artistique, vos œuvres, vos expériences..."></textarea>
+                </div>
+                <div class="ins-group">
+                    <label>URL Photo (optionnel)</label>
+                    <input type="text" id="ins-photo" placeholder="https://... lien vers votre photo">
+                </div>
+                <hr class="ins-sep">
+                <div class="ins-group">
+                    <label>Mot de passe * <span style="font-weight:400;font-size:0.78rem;">(pour accéder à votre espace)</span></label>
+                    <input type="password" id="ins-pass" placeholder="Min. 6 caractères">
+                </div>
+                <div class="ins-group">
+                    <label>Confirmer le mot de passe *</label>
+                    <input type="password" id="ins-pass2" placeholder="Répétez le mot de passe">
+                </div>
+                <button class="ins-btn" onclick="soumettreDemande()">Envoyer ma demande →</button>
+                <div class="ins-erreur" id="ins-erreur"></div>
+            </div>
+
+            <div class="ins-succes" id="ins-succes">
+                ✅ <strong>Demande envoyée avec succès !</strong><br>
+                Votre demande est en attente de validation par l'administration.<br>
+                Vous serez contacté par email une fois approuvé.
+            </div>
+
+            <p style="text-align:center;margin-top:1rem;font-size:0.82rem;color:#666;">
+                Déjà inscrit ? <a href="artiste-espace.html" style="color:#c0392b;font-weight:600;">Accéder à mon espace →</a>
+            </p>
+        </div>
+    </div>
+</div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
