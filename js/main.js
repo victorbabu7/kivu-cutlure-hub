@@ -15,7 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db  = getFirestore(app);
 
-// ══ NAV ══
+//  NAV 
 const nav = document.getElementById('nav');
 if (nav) {
     window.addEventListener('scroll', () => {
@@ -45,7 +45,7 @@ document.querySelectorAll('a[href^="#"]').forEach(lien => {
     });
 });
 
-// ══ REVEAL ══
+// REVEAL
 const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.15 });
@@ -68,9 +68,9 @@ window.envoyerMessage = async function() {
     } catch(e) { alert('Erreur : ' + e.message); }
 };
 
-// ══════════════════════════════════════════
+
 // PAGE INDEX
-// ══════════════════════════════════════════
+
 if (document.querySelector('.hero-stats') || document.querySelector('.categories-grille')) {
 
     async function chargerDonneesIndex() {
@@ -107,7 +107,7 @@ if (document.querySelector('.hero-stats') || document.querySelector('.categories
                 countEl.textContent = (filiereCount[key] || 0) + ' artiste(s)';
             });
 
-            // ── Grille artistes en vedette (index) ──
+            // Grille artistes en vedette (index) 
             const grilleArt = document.querySelector('.artistes-grille');
             if (grilleArt) {
                 const artistes = [];
@@ -117,7 +117,9 @@ if (document.querySelector('.hero-stats') || document.querySelector('.categories
                 const top4 = artistes.slice(0, 4);
                 grilleArt.innerHTML = '';
                 const delays = ['reveal-delay-1','reveal-delay-2','reveal-delay-3','reveal-delay-4'];
-                const tagClass = { musique:'tag-rouge', danse:'tag-vert', theatre:'tag-or', peinture:'tag-bleu', sculpture:'tag-orange', cinema:'tag-violet', artisanat:'tag-orange' };
+                const tagClass = { musique:'tag-rouge', danse:'tag-vert', theatre:'tag-or',
+                     peinture:'tag-bleu', sculpture:'tag-orange', 
+                     cinema:'tag-violet', artisanat:'tag-orange' };
                 const emojis   = { musique:'🎵', danse:'💃', theatre:'🎭', peinture:'🎨', sculpture:'🗿', cinema:'🎬', artisanat:'🏺' };
                 const photoBgs = ['photo-bg-1','photo-bg-2','photo-bg-3','photo-bg-4'];
                 top4.forEach((a, i) => {
@@ -142,7 +144,7 @@ if (document.querySelector('.hero-stats') || document.querySelector('.categories
                 document.querySelectorAll('.artiste-carte.reveal').forEach(el => observer.observe(el));
             }
 
-            // ── Grille œuvres en vedette (index) ──
+            // ── Grille œuvres en vedette (index) 
             const grilleOeu = document.querySelector('.oeuvres-grille');
             if (grilleOeu) {
                 const oeuvres = [];
@@ -207,10 +209,8 @@ if (document.querySelector('.hero-stats') || document.querySelector('.categories
     });
 }
 
-
-// ══════════════════════════════════════════
 // PAGE ARTISTES
-// ══════════════════════════════════════════
+
 if (document.querySelector('.artistes-grille-page')) {
     const grille      = document.querySelector('.artistes-grille-page');
     const chargement  = document.getElementById('chargement');
@@ -240,7 +240,7 @@ if (document.querySelector('.artistes-grille-page')) {
                         </div>
                         <div class="artiste-info-page">
                             <div class="artiste-nom-page">${a.nom}</div>
-                            <div class="artiste-ville-page">📍 ${a.ville || 'Bukavu'}</div>
+                            <div class="artiste-ville-page"> ${a.ville || 'Bukavu'}</div>
                             <div class="artiste-bio-page">${a.bio || ''}</div>
                             <a href="artiste.html?id=${d.id}" class="artiste-lien-page">Voir le profil →</a>
                         </div>
@@ -300,9 +300,8 @@ if (document.querySelector('.artistes-grille-page')) {
 }
 
 
-// ══════════════════════════════════════════
 // PAGE PROFIL ARTISTE
-// ══════════════════════════════════════════
+
 if (document.getElementById('profil-nom')) {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
@@ -353,7 +352,12 @@ if (document.getElementById('profil-nom')) {
             }
 
             // Badge filière
-            const tagClass = { musique:'tag-rouge', danse:'tag-vert', theatre:'tag-or', peinture:'tag-bleu', sculpture:'tag-orange', cinema:'tag-violet', artisanat:'tag-orange' }[a.filiere] || 'tag-rouge';
+            const tagClass = { musique:'tag-rouge',
+                 danse:'tag-vert', theatre:'tag-or',
+                  peinture:'tag-bleu', 
+                  sculpture:'tag-orange', 
+                  cinema:'tag-violet', 
+                  artisanat:'tag-orange' }[a.filiere] || 'tag-rouge';
             const tag = document.getElementById('profil-filiere-tag');
             if (tag) { tag.textContent = a.filiere; tag.className = 'tag ' + tagClass; }
 
@@ -370,7 +374,6 @@ if (document.getElementById('profil-nom')) {
                     } catch(e) { console.error(e); }
                 });
             }
-
             // Œuvres liées à cet artiste
             const grilleOeuvres = document.getElementById('profil-oeuvres-grille');
             if (grilleOeuvres) {
@@ -384,7 +387,8 @@ if (document.getElementById('profil-nom')) {
                     nb++;
                     grilleOeuvres.innerHTML += `
                         <div class="oeuvre-carte">
-                            <div class="oeuvre-visuel" style="${o.url && o.type !== 'audio' && o.type !== 'video' ? `background-image:url(${o.url});background-size:cover;` : ''}">
+                            <div class="oeuvre-visuel" style="${o.url && o.type !== 'audio' && o.type !== 'video' ? `background-image:url(${o.url});
+                            background-size:cover;` : ''}">
                                 ${o.type === 'audio' ? '<span style="font-size:3rem;">🎵</span>' : ''}
                                 ${o.type === 'video' ? '<span style="font-size:3rem;">🎬</span>' : ''}
                                 <span class="oeuvre-badge tag">${o.type}</span>
@@ -393,8 +397,12 @@ if (document.getElementById('profil-nom')) {
                                 <h3 class="oeuvre-nom">${o.titre}</h3>
                                 <p class="oeuvre-annee">${o.annee || ''}</p>
                                 <p style="font-size:0.9rem;color:#666;margin-top:0.5rem;">${o.desc || ''}</p>
-                                ${o.url && o.type === 'audio' ? `<audio controls style="width:100%;margin-top:1rem;"><source src="${o.url}" type="audio/mp3"></audio>` : ''}
-                                ${o.url && o.type === 'video' ? `<video controls style="width:100%;margin-top:1rem;max-height:200px;"><source src="${o.url}" type="video/mp4"></video>` : ''}
+                                ${o.url && o.type === 'audio' ? 
+                                    `<audio controls style="width:100%;
+                                    margin-top:1rem;"><source src="${o.url}" type="audio/mp3"></audio>` : ''}
+                                ${o.url && o.type === 'video' ? 
+                                    `<video controls style="width:100%;margin-top:1rem;max-height:200px;
+                                    "><source src="${o.url}" type="video/mp4"></video>` : ''}
                             </div>
                         </div>`;
                 });
@@ -435,9 +443,8 @@ if (document.getElementById('profil-nom')) {
 }
 
 
-// ══════════════════════════════════════════
-// PAGE ACTUALITES
-// ══════════════════════════════════════════
+// PAGE ACTUALITE
+
 if (document.getElementById('news-grille') && document.querySelector('.news-page-grille')) {
     const grille      = document.querySelector('.news-page-grille');
     const vide        = document.getElementById('vide');
@@ -556,18 +563,15 @@ if (document.getElementById('news-titre')) {
 }
 
 
-// ══════════════════════════════════════════
 // UTILITAIRE YOUTUBE
-// ══════════════════════════════════════════
+
 function youtubeEmbed(url) {
     if (!url) return null;
     const m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&?/]+)/);
     return m ? `https://www.youtube.com/embed/${m[1]}` : null;
 }
 
-// ══════════════════════════════════════════
 // PAGE OEUVRES
-// ══════════════════════════════════════════
 if (document.getElementById('oeuvres-grille')) {
     const grille      = document.getElementById('oeuvres-grille');
     const vide        = document.getElementById('vide');
@@ -599,7 +603,9 @@ if (document.getElementById('oeuvres-grille')) {
                 if (o.url) {
                     const ytEmbed = youtubeEmbed(o.url);
                     if (ytEmbed) {
-                        mediaHtml = `<iframe style="width:100%;height:150px;border:none;border-radius:8px;margin-top:0.8rem;" src="${ytEmbed}" allowfullscreen></iframe>`;
+                        mediaHtml = `<iframe style="width:100%;
+                        height:150px;border:none;border-radius:8px;
+                        margin-top:0.8rem;" src="${ytEmbed}" allowfullscreen></iframe>`;
                     } else if (o.type === 'audio') {
                         mediaHtml = `<audio controls class="profil-audio"><source src="${o.url}" type="audio/mp3"></audio>`;
                     } else if (o.type === 'video') {
@@ -609,7 +615,9 @@ if (document.getElementById('oeuvres-grille')) {
 
                 grille.innerHTML += `
                     <div class="oeuvre-carte-page" data-type="${o.type}">
-                        <div class="oeuvre-visuel ${bgs[i%4]}" style="${o.url && (o.type==='peinture'||o.type==='photo') ? `background-image:url(${o.url});background-size:cover;` : ''}">
+                        <div class="oeuvre-visuel ${bgs[i%4]}
+                        " style="${o.url && (o.type==='peinture'||o.type==='photo') ? `background-image:url(${o.url});
+                        background-size:cover;` : ''}">
                             <div class="oeuvre-overlay">
                                 <span class="oeuvre-type">${o.type}</span>
                                 <div class="oeuvre-titre">${o.titre}</div>
@@ -682,10 +690,7 @@ if (document.getElementById('oeuvres-grille')) {
     chargerOeuvresPage();
 }
 
-
-// ══════════════════════════════════════════
 // AUTH HELPERS
-// ══════════════════════════════════════════
 function hashSimple(str) {
     // Hash simple côté client (non cryptographique, suffisant pour ce cas)
     let h = 0;
@@ -709,10 +714,7 @@ async function creerSuperAdminSiAbsent() {
         });
     }
 }
-
-// ══════════════════════════════════════════
 // PAGE LOGIN
-// ══════════════════════════════════════════
 if (document.getElementById("login-form")) {
 
     // S'assurer que le super admin existe
@@ -781,7 +783,7 @@ if (document.getElementById("login-form")) {
                 // Afficher le bloc de réinitialisation
                 document.getElementById('recup-reset-bloc').style.display = 'block';
                 document.getElementById('recup-reset-bloc').dataset.adminId = trouve.id;
-                if (msgEl) { msgEl.textContent = '✅ Identité vérifiée. Définissez un nouveau mot de passe.'; msgEl.style.color = '#27ae60'; }
+                if (msgEl) { msgEl.textContent = ' Identité vérifiée. Définissez un nouveau mot de passe.'; msgEl.style.color = '#27ae60'; }
             } else {
                 if (msgEl) { msgEl.textContent = 'Email ou mot de sécurité incorrect.'; msgEl.style.color = '#c0392b'; }
             }
@@ -799,7 +801,7 @@ if (document.getElementById("login-form")) {
         }
         try {
             await updateDoc(doc(db, 'kivu-admins', adminId), { motDePasse: hashSimple(newPass) });
-            if (msgEl) { msgEl.textContent = '✅ Mot de passe réinitialisé ! Vous pouvez vous connecter.'; msgEl.style.color = '#27ae60'; }
+            if (msgEl) { msgEl.textContent = ' Mot de passe réinitialisé ! Vous pouvez vous connecter.'; msgEl.style.color = '#27ae60'; }
             setTimeout(() => {
                 document.getElementById('recup-bloc').style.display = 'none';
             }, 2000);
@@ -1209,7 +1211,7 @@ if (document.getElementById('panel-artistes')) {
                 liste.innerHTML += `
                     <div class="admin-item">
                         <div class="admin-item-info">
-                            <div class="admin-item-nom">${a.nom} ${a.role === 'super' ? '👑' : '🛡'}</div>
+                            <div class="admin-item-nom">${a.nom} ${a.role === 'super' ? '' : ''}</div>
                             <div class="admin-item-meta">
                                 ${a.email} · @${a.username} · <strong>${a.role === 'super' ? 'Super Admin' : 'Admin'}</strong>
                             </div>
@@ -1272,7 +1274,7 @@ if (document.getElementById('panel-artistes')) {
         if (panelAdmins) panelAdmins.style.display = 'none';
     }
 
-    // ── Mise à jour adminTab pour inclure le nouveau panel ──
+    // ── Mise à jour adminTab pour inclure le nouveau panel 
     const _origAdminTab = window.adminTab;
     window.adminTab = function(nom) {
         document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('actif'));
@@ -1322,131 +1324,3 @@ window.modifierMotDePasse = async function() {
     } catch(e) { alert('Erreur : ' + e.message); }
 };
 
-
-
-if (document.getElementById('news-titre')) {
- 
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get('id');
- 
-    const newsData = {
-        '1': {
-            titre: 'Festival Culturel de Bukavu 2026',
-            date: '14 Mai 2026',
-            cat: 'evenement',
-            tag: 'Événement',
-            tagClass: 'tag-rouge',
-            emoji: '🎪',
-            bg: 'ob-1',
-            texte: `
-                <p>Le grand festival annuel réunit les meilleurs artistes du Sud-Kivu pour trois jours de musique, danse et exposition. Cet événement majeur rassemble des milliers de visiteurs venus de toute la région pour célébrer la richesse culturelle de Bukavu.</p>
-                <p>Cette édition 2026 promet d'être la plus grande jamais organisée, avec plus de 50 artistes locaux et internationaux sur scène. Les festivaliers pourront découvrir des performances de musique traditionnelle, de danse contemporaine, de théâtre et d'arts visuels.</p>
-                <p>L'événement se tiendra au Stade de Bukavu du 20 au 22 juin 2026. L'entrée est gratuite pour tous les habitants de Bukavu.</p>
-            `
-        },
-        '2': {
-            titre: 'Victor Mwendanga en concert au Lac Kivu',
-            date: '10 Mai 2026',
-            cat: 'artiste',
-            tag: 'Artiste',
-            tagClass: 'tag-vert',
-            emoji: '🎵',
-            bg: 'ob-2',
-            texte: `
-                <p>Le talentueux musicien Victor Mwendanga se produit en plein air au bord du lac Kivu pour un concert exceptionnel. Une soirée inoubliable mêlant musique traditionnelle et sonorités modernes sous les étoiles de Bukavu.</p>
-                <p>Victor Mwendanga est l'un des musiciens les plus appréciés de la région. Son style unique fusionne les rythmes traditionnels du Kivu avec des influences modernes, créant une musique qui touche toutes les générations.</p>
-                <p>Le concert aura lieu le 25 mai 2026 à partir de 19h sur la plage du lac Kivu. Les places sont limitées — réservez dès maintenant.</p>
-            `
-        },
-        '3': {
-            titre: "Exposition de peinture d'Isaac Kalume à Bukavu",
-            date: '5 Mai 2026',
-            cat: 'artiste',
-            tag: 'Artiste',
-            tagClass: 'tag-bleu',
-            emoji: '🎨',
-            bg: 'ob-3',
-            texte: `
-                <p>Isaac Kalume expose ses nouvelles œuvres inspirées du paysage du Sud-Kivu au Centre Culturel de Bukavu. Une collection de 20 tableaux retraçant la beauté naturelle et humaine de la région.</p>
-                <p>L'artiste a travaillé pendant deux ans sur cette série de peintures. Chaque tableau capture un moment unique de la vie quotidienne à Bukavu — les marchés animés, le lac Kivu au coucher du soleil, les enfants qui jouent dans les rues.</p>
-                <p>L'exposition est ouverte du 10 au 30 mai 2026 au Centre Culturel de Bukavu, de 9h à 18h du mardi au dimanche. Entrée libre.</p>
-            `
-        },
-        '4': {
-            titre: 'Nouveau centre culturel en construction à Bukavu',
-            date: '1 Mai 2026',
-            cat: 'urbain',
-            tag: 'Urbain',
-            tagClass: 'tag-or',
-            emoji: '🏙',
-            bg: 'ob-4',
-            texte: `
-                <p>La ville de Bukavu investit dans un nouveau centre culturel moderne pour accueillir les artistes locaux et les événements culturels. Un projet ambitieux qui valorise le patrimoine culturel du Sud-Kivu.</p>
-                <p>Le centre comprendra une salle de spectacle de 500 places, des ateliers pour les artistes, une galerie d'art permanente et un espace de répétition. La construction devrait être terminée d'ici fin 2027.</p>
-                <p>Ce projet est financé par la mairie de Bukavu en partenariat avec plusieurs organisations internationales de développement culturel.</p>
-            `
-        },
-        '5': {
-            titre: 'Compétition de danse traditionnelle au Sud-Kivu',
-            date: '25 Avril 2026',
-            cat: 'evenement',
-            tag: 'Événement',
-            tagClass: 'tag-rouge',
-            emoji: '💃',
-            bg: 'ob-2',
-            texte: `
-                <p>Les meilleurs danseurs de la province s'affrontent dans une compétition spectaculaire mettant en valeur les danses traditionnelles du Congo. Jetty Bahati figurait parmi les favoris.</p>
-                <p>La compétition a réuni 30 danseurs venus de toutes les communes du Sud-Kivu. Chaque participant a présenté une chorégraphie mêlant tradition et modernité, devant un jury de cinq experts en arts de la scène.</p>
-                <p>Jetty Bahati a remporté la première place avec une performance exceptionnelle, alliant grâce et technique dans une danse qui a ému tout le public présent.</p>
-            `
-        },
-        '6': {
-            titre: "La culture de Bukavu reconnue à l'international",
-            date: '20 Avril 2026',
-            cat: 'urbain',
-            tag: 'Urbain',
-            tagClass: 'tag-or',
-            emoji: '🌍',
-            bg: 'ob-1',
-            texte: `
-                <p>Des artistes de Bukavu ont été invités à représenter la RDC lors d'un festival international en Europe. Une reconnaissance majeure pour la scène culturelle du Sud-Kivu.</p>
-                <p>Cinq artistes de Bukavu — dont Victor Mwendanga et Jetty Bahati — ont participé au Festival des Cultures du Monde à Paris. Leur performance a reçu une ovation du public international et une couverture médiatique importante.</p>
-                <p>Cette reconnaissance internationale ouvre de nouvelles portes pour les artistes du Kivu et confirme la richesse et la singularité de la culture de cette région de la RDC.</p>
-            `
-        }
-    };
- 
-    const news = newsData[id];
- 
-    if (news) {
-        document.getElementById('news-titre').textContent       = news.titre;
-        document.getElementById('news-breadcrumb').textContent  = news.titre;
-        document.getElementById('news-date').textContent        = news.date;
-        document.getElementById('news-emoji').textContent       = news.emoji;
-        document.getElementById('news-texte').innerHTML         = news.texte;
-        document.title = news.titre + ' — Kivu Culture Hub';
- 
-        const tag = document.getElementById('news-tag');
-        tag.textContent = news.tag;
-        tag.className   = 'tag ' + news.tagClass;
- 
-        const visuel = document.getElementById('news-visuel');
-        visuel.style.background = '';
-        visuel.classList.add(news.bg);
-    }
- 
-    // Autres news dans la sidebar
-    const autresNews = document.getElementById('autres-news');
-    if (autresNews) {
-        Object.entries(newsData)
-            .filter(([key]) => key !== id)
-            .slice(0, 4)
-            .forEach(([key, n]) => {
-                autresNews.innerHTML += `
-                    <div class="sidebar-news-item">
-                        <div class="sidebar-news-date">${n.date}</div>
-                        <a href="news.html?id=${key}" class="sidebar-news-titre">${n.titre}</a>
-                    </div>`;
-            });
-    }
-}

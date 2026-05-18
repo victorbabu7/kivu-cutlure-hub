@@ -2884,3 +2884,422 @@ body.admin-body {
 }
  
 
+
+/* ══════════════════════════════════════════════════════
+   ADMIN — RESPONSIVE + BURGER
+   À coller à la fin de style.css
+══════════════════════════════════════════════════════ */
+
+
+/* ── Nouveaux éléments header admin ── */
+
+.admin-header-droite {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.admin-nom-connecte {
+    font-size: 0.8rem;
+    color: #aaa;
+    font-weight: 600;
+}
+
+.admin-btn-logout {
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.admin-btn-logout:hover { background: #a93226; }
+
+/* Burger — caché sur desktop */
+.admin-burger {
+    display: none;
+    background: none;
+    border: 1px solid #555;
+    color: #fff;
+    font-size: 1.2rem;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    border-radius: 4px;
+    flex-shrink: 0;
+    transition: border-color 0.2s;
+}
+.admin-burger:hover { border-color: #fff; }
+
+
+/* ── Utilitaires ── */
+
+.admin-btn-edit {
+    padding: 0.35rem 0.8rem;
+    background: #2471a3;
+    color: #fff;
+    border: none;
+    font-size: 0.75rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+.admin-btn-edit:hover { background: #1a5276; }
+
+.admin-textarea-tall { min-height: 150px; }
+
+.admin-form-bloc-etroit { max-width: 440px; }
+
+.admin-separateur {
+    border: none;
+    border-top: 1px solid #e8e4de;
+    margin: 1.5rem 0;
+}
+
+.admin-label-hint {
+    font-size: 0.72rem;
+    color: #aaa;
+    margin: -0.5rem 0 0.4rem 0;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: normal;
+}
+
+.admin-info-bloc {
+    border-radius: 4px;
+    padding: 0.8rem 1rem;
+    font-size: 0.82rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+.admin-info-jaune {
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    color: #795548;
+}
+.admin-info-bleu {
+    background: #f0f7ff;
+    border: 1px solid #bee0fd;
+    color: #1a4a72;
+}
+
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — Tablette (≤ 1024px)
+══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+    .admin-grille {
+        grid-template-columns: 380px 1fr;
+    }
+    .admin-tabs {
+        padding: 0 1rem;
+        overflow-x: auto;
+    }
+    .admin-tab {
+        padding: 1rem 1rem;
+        white-space: nowrap;
+    }
+}
+
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — Mobile (≤ 768px)
+══════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+    /* Header : cacher droite, montrer burger */
+    .admin-header-droite { display: none; }
+    .admin-burger        { display: flex; align-items: center; justify-content: center; }
+
+    /* Tabs : repliés par défaut */
+    .admin-tabs {
+        display: none;
+        flex-direction: column;
+        padding: 0;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        z-index: 98;
+        background: #fff;
+        border-bottom: 2px solid #e8e4de;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        overflow-x: unset;
+    }
+
+    /* Ouverture par classe JS */
+    .admin-tabs.admin-tabs-ouvert { display: flex; }
+
+    .admin-tab {
+        padding: 0.9rem 1.5rem;
+        border-bottom: 1px solid #f0ede8;
+        border-left: 3px solid transparent;
+        border-bottom-color: transparent;
+        margin-bottom: 0;
+        font-size: 0.88rem;
+        white-space: normal;
+    }
+    .admin-tab:last-child { border-bottom: none; }
+    .admin-tab.actif {
+        border-left-color: #c0392b;
+        background: #fafaf8;
+    }
+    .admin-tab:hover { color: #1a1a1a; background: #fafaf8; }
+
+    /* Panels */
+    .admin-panel { padding: 1.2rem 1rem; }
+
+    /* Grille → une colonne */
+    .admin-grille { grid-template-columns: 1fr; }
+
+    /* Form row → une colonne */
+    .admin-form-row { grid-template-columns: 1fr; gap: 0; }
+
+    /* Bloc form étroit → pleine largeur */
+    .admin-form-bloc-etroit { max-width: 100%; }
+
+    /* Padding header réduit */
+    .admin-header { padding: 0 1rem; }
+
+    /* Panel titre */
+    .admin-panel-titre { font-size: 1.2rem; }
+
+    /* Items liste : flex colonne sur très petit */
+    .admin-item { flex-wrap: wrap; gap: 0.5rem; }
+    .admin-item > div:last-child { width: 100%; justify-content: flex-end; }
+}
+
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — Petit mobile (≤ 480px)
+══════════════════════════════════════════ */
+@media (max-width: 480px) {
+    .admin-logo    { font-size: 0.95rem; }
+    .admin-form-bloc { padding: 1rem; }
+    .admin-panel   { padding: 1rem 0.75rem; }
+    .admin-liste-header { padding: 0.9rem 1rem; }
+    .admin-item    { padding: 0.9rem 1rem; }
+    .admin-toast   { bottom: 1rem; right: 1rem; left: 1rem; text-align: center; }
+}
+
+
+/* ══════════════════════════════════════════
+   WIDGET UPLOAD
+══════════════════════════════════════════ */
+
+.upload-widget {
+    border: 1px solid #e8e4de;
+    background: #fff;
+    overflow: hidden;
+}
+.upload-tabs {
+    display: flex;
+    border-bottom: 1px solid #e8e4de;
+}
+.upload-tab {
+    flex: 1;
+    padding: 0.5rem 0.6rem;
+    background: #fafaf8;
+    border: none;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #888;
+    transition: background 0.15s, color 0.15s;
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: 'Georgia', serif;
+}
+.upload-tab.actif { background: #fff; color: #c0392b; }
+.upload-tab:hover  { background: #fff; color: #1a1a1a; }
+
+.upload-panel { padding: 0.75rem; }
+.upload-panel-cache { display: none; }
+
+.upload-panel input[type="text"] {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid #e8e4de;
+    background: #fafaf8;
+    font-family: 'Georgia', serif;
+    font-size: 0.88rem;
+    color: #1a1a1a;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+.upload-panel input[type="text"]:focus {
+    border-color: #c0392b;
+    background: #fff;
+}
+
+.upload-hint {
+    font-size: 0.72rem;
+    color: #aaa;
+    margin: 0.3rem 0 0 0;
+    text-transform: none;
+    letter-spacing: 0;
+}
+.upload-dropzone {
+    border: 2px dashed #ccc;
+    padding: 1.2rem;
+    text-align: center;
+    cursor: pointer;
+    color: #aaa;
+    font-size: 0.82rem;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.upload-dropzone:hover    { border-color: #c0392b; background: #fff5f5; color: #c0392b; }
+.upload-dropzone.dragover { border-color: #c0392b; background: #fff0f0; }
+.upload-input-cache  { display: none; }
+
+.upload-preview {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 0.75rem 0.6rem;
+}
+.upload-preview-cache { display: none; }
+.upload-preview-img {
+    max-height: 70px;
+    border: 1px solid #e8e4de;
+}
+.upload-clear-btn {
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.upload-clear-btn:hover { background: #a93226; }
+
+
+/* ══════════════════════════════════════════
+   PAGE LOGIN
+══════════════════════════════════════════ */
+
+body.login-body {
+    min-height: 100vh;
+    background: #f5f4f0;
+    display: flex;
+    flex-direction: column;
+}
+.login-topbar {
+    background: #fff;
+    border-bottom: 1px solid #e8e4de;
+    padding: 1rem 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.login-topbar-logo {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #1a1a1a;
+    text-decoration: none;
+}
+.login-topbar-logo span { color: #c0392b; }
+.login-topbar-retour {
+    font-size: 0.8rem;
+    color: #999;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    padding: 0.4rem 1rem;
+    transition: all 0.2s;
+}
+.login-topbar-retour:hover { color: #1a1a1a; border-color: #1a1a1a; }
+
+.login-page-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+}
+.login-container { width: 100%; max-width: 420px; }
+.login-card {
+    background: #fff;
+    border: 1px solid #e8e4de;
+    padding: 2.5rem 2rem;
+}
+.login-icon      { text-align: center; font-size: 2.5rem; margin-bottom: 0.5rem; }
+.login-titre     { font-size: 1.5rem; font-weight: 700; text-align: center; color: #1a1a1a; margin-bottom: 0.2rem; }
+.login-titre span { color: #c0392b; }
+.login-sous-titre { text-align: center; color: #888; font-size: 0.85rem; margin-bottom: 2rem; }
+
+.login-group { margin-bottom: 1rem; }
+.login-group label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 0.4rem;
+}
+.login-group input {
+    width: 100%;
+    padding: 0.72rem 1rem;
+    border: 1px solid #e8e4de;
+    background: #fafaf8;
+    font-family: 'Georgia', serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+.login-group input:focus { border-color: #c0392b; background: #fff; }
+
+.login-btn {
+    width: 100%;
+    padding: 0.85rem;
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    font-family: 'Georgia', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background 0.2s;
+}
+.login-btn:hover:not(:disabled) { background: #a93226; }
+.login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.login-erreur {
+    display: none;
+    background: #fdecea;
+    color: #c0392b;
+    border: 1px solid #f5c6c0;
+    padding: 0.6rem 1rem;
+    font-size: 0.83rem;
+    margin-top: 0.75rem;
+    text-align: center;
+}
+.login-oublie {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.82rem;
+}
+.login-oublie a { color: #c0392b; text-decoration: none; font-weight: 600; cursor: pointer; }
+.login-oublie a:hover { text-decoration: underline; }
+
+.recup-bloc {
+    display: none;
+    margin-top: 1.5rem;
+    border-top: 1px solid #e8e4de;
+    padding-top: 1.2rem;
+}
+.recup-titre { font-size: 0.9rem; font-weight: 700; color: #1a1a1a; margin-bottom: 1rem; }
+.recup-msg   { font-size: 0.82rem; margin-top: 0.75rem; min-height: 1.2rem; }
+.recup-reset-bloc { display: none; margin-top: 0.8rem; }
+.login-sep   { border: none; border-top: 1px solid #e8e4de; margin: 1.2rem 0; }

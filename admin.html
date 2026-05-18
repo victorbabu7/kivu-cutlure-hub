@@ -11,19 +11,20 @@
 <!-- ════════════════════════════════════
      HEADER
 ════════════════════════════════════ -->
-<header class="admin-header">
+<header class="admin-header" id="admin-header">
     <div class="admin-logo">Kivu <span>Culture</span> Hub — Admin</div>
-    <div class="admin-header-droite">
+    <div class="admin-header-droite" id="admin-header-droite">
         <span id="admin-nom-connecte" class="admin-nom-connecte"></span>
         <a href="index.html" class="admin-back">← Voir le site</a>
         <button onclick="adminLogout()" class="admin-btn-logout">🚪 Déconnexion</button>
     </div>
+    <button class="admin-burger" id="admin-burger" aria-label="Ouvrir le menu">☰</button>
 </header>
 
 <!-- ════════════════════════════════════
      TABS
 ════════════════════════════════════ -->
-<div class="admin-tabs">
+<div class="admin-tabs" id="admin-tabs">
     <div class="admin-tab actif" onclick="adminTab('artistes')">🎨 Artistes</div>
     <div class="admin-tab" onclick="adminTab('oeuvres')">🖼 Œuvres</div>
     <div class="admin-tab" onclick="adminTab('news')">📰 Actualités</div>
@@ -37,7 +38,7 @@
 <div class="admin-panel" id="panel-mon-compte">
     <div class="admin-panel-titre">Mon compte</div>
     <p class="admin-panel-desc">Modifier votre email ou mot de passe.</p>
-    <div class="admin-form-bloc" style="max-width:420px;">
+    <div class="admin-form-bloc admin-form-bloc-etroit">
         <div class="admin-form-titre">Changer l'email</div>
         <div class="admin-form-group">
             <label>Nouvel email</label>
@@ -425,6 +426,26 @@ function clearUpload(prefix) {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+
+    // ── Burger menu ──
+    const burger = document.getElementById('admin-burger');
+    const tabs   = document.getElementById('admin-tabs');
+    if (burger && tabs) {
+        burger.addEventListener('click', function() {
+            const ouvert = tabs.classList.toggle('admin-tabs-ouvert');
+            burger.textContent = ouvert ? '✕' : '☰';
+            burger.setAttribute('aria-label', ouvert ? 'Fermer le menu' : 'Ouvrir le menu');
+        });
+        // Fermer après sélection d'un tab sur mobile
+        tabs.querySelectorAll('.admin-tab').forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    tabs.classList.remove('admin-tabs-ouvert');
+                    burger.textContent = '☰';
+                }
+            });
+        });
+    }
     ['art','oeu'].forEach(prefix => {
         const dz = document.getElementById(prefix + '-dropzone');
         if (!dz) return;
