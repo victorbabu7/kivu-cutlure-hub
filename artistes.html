@@ -15,20 +15,18 @@
     <div class="nav-inner">
         <a href="index.html" class="nav-logo">Kivu <span>Culture</span> Hub</a>
         <ul class="nav-liens">
-            <li><a href="artistes.html" class="actif">Artistes</a></li>
-            <li><a href="oeuvres.html">Œuvres</a></li>
-            <li><a href="actualites.html">Actualités</a></li>
+            <li><a href="artistes.html" class="actif" data-i18n="nav.artistes">Artistes</a></li>
+            <li><a href="oeuvres.html" data-i18n="nav.oeuvres">Œuvres</a></li>
+            <li><a href="actualites.html" data-i18n="nav.actualites">Actualités</a></li>
             <li><a href="index.html#annuaire">Annuaire</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-            <li><a href="admin.html" class="nav-btn">Admin</a></li>
+            <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+            <li><a href="connexion.html" class="nav-btn" data-i18n="nav_connecter">Se connecter</a></li>
         </ul>
         <button class="burger" id="burger">☰</button>
     </div>
 </nav>
 
-<!-- ════════════════════════════════════
-     EN-TETE PAGE
-════════════════════════════════════ -->
+
 <div class="page-entete">
     <div class="conteneur">
         <div class="page-entete-inner">
@@ -36,7 +34,7 @@
                 <p class="page-breadcrumb">
                     <a href="index.html">Accueil</a> → Artistes
                 </p>
-                <h1 class="page-titre">
+                <h1 class="page-titre" data-i18n="artistes.titre">
                     Nos <span>Artistes</span>
                 </h1>
                 <p class="page-desc">
@@ -46,11 +44,11 @@
             </div>
             <div class="page-stats">
                 <div class="page-stat">
-                    <span class="page-stat-num" id="total-artistes">44</span>
+                    <span class="page-stat-num" id="total-artistes"></span>
                     <span class="page-stat-label">Artistes</span>
                 </div>
                 <div class="page-stat">
-                    <span class="page-stat-num">6</span>
+                    <span class="page-stat-num"></span>
                     <span class="page-stat-label">Filières</span>
                 </div>
             </div>
@@ -58,9 +56,7 @@
     </div>
 </div>
 
-<!-- ════════════════════════════════════
-     FILTRES
-════════════════════════════════════ -->
+
 <div class="filtres-barre">
     <div class="conteneur">
         <div class="filtres-inner">
@@ -71,14 +67,14 @@
                 <input 
                     type="text" 
                     id="recherche-artiste"
-                    placeholder="Rechercher un artiste..."
+                    data-i18n="artistes.recherche" placeholder="Rechercher un artiste..."
                     class="filtre-input"
                 >
             </div>
 
             <!-- Filtres filières -->
             <div class="filtres-filieres">
-                <button class="filtre-btn actif" data-filiere="tous">Tous</button>
+                <button class="filtre-btn actif" data-filiere="tous" data-i18n="btn.tous">Tous</button>
                 <button class="filtre-btn" data-filiere="musique">🎵 Musique</button>
                 <button class="filtre-btn" data-filiere="danse">💃 Danse</button>
                 <button class="filtre-btn" data-filiere="theatre">🎭 Théâtre</button>
@@ -92,22 +88,20 @@
     </div>
 </div>
 
-<!-- ════════════════════════════════════
-     GRILLE ARTISTES
-════════════════════════════════════ -->
+
 <section class="artistes-section">
     <div class="conteneur">
 
         <!-- Message chargement -->
         <div class="chargement" id="chargement">
             <div class="chargement-spinner"></div>
-            <p>Chargement des artistes...</p>
+            <p data-i18n="chargement">Chargement des artistes...</p>
         </div>
 
         <!-- Message vide -->
         <div class="vide" id="vide" style="display:none;">
             <span style="font-size:3rem;">🎭</span>
-            <p>Aucun artiste trouvé.</p>
+            <p data-i18n="artistes.vide">Aucun artiste trouvé.</p>
         </div>
 
         <!-- Grille -->
@@ -153,14 +147,14 @@
         <div>
             <div class="footer-col-titre">Contact</div>
             <ul class="footer-liens">
-                <li><a href="#">📍 Bukavu, Sud-Kivu</a></li>
-                <li><a href="#">📧 contact@kivuculturehub.cd</a></li>
-                <li><a href="#">📞 +243 XXX XXX XXX</a></li>
+                <li><a href="#"> Bukavu, Sud-Kivu</a></li>
+                <li><a href="#"> kivuculturehub@gmail.com</a></li>
+                <li><a href="#"> +243 972 212 629</a></li>
             </ul>
         </div>
     </div>
     <div class="footer-bas">
-        © 2026 Kivu Culture Hub — Bukavu, Sud-Kivu, RDC
+        © 2026 Kivu Culture Hub — kivu, RDC
     </div>
 </footer>
 

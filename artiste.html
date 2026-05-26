@@ -15,12 +15,12 @@
     <div class="nav-inner">
         <a href="index.html" class="nav-logo">Kivu <span>Culture</span> Hub</a>
         <ul class="nav-liens">
-            <li><a href="artistes.html" class="actif">Artistes</a></li>
-            <li><a href="oeuvres.html">Œuvres</a></li>
-            <li><a href="actualites.html">Actualités</a></li>
+            <li><a href="artistes.html" class="actif" data-i18n="nav.artistes">Artistes</a></li>
+            <li><a href="oeuvres.html" data-i18n="nav.oeuvres">Œuvres</a></li>
+            <li><a href="actualites.html" data-i18n="nav.actualites">Actualités</a></li>
             <li><a href="index.html#annuaire">Annuaire</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-            <li><a href="admin.html" class="nav-btn">Admin</a></li>
+            <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+            <li><a href="connexion.html" class="nav-btn" data-i18n="nav_connecter">Se connecter</a></li>
         </ul>
         <button class="burger" id="burger">☰</button>
     </div>
@@ -90,7 +90,7 @@
     <div class="conteneur">
         <div class="section-entete reveal">
             <div>
-                <h2 class="section-titre">Ses <span>œuvres</span></h2>
+                <h2 class="section-titre" data-i18n="profil.oeuvres">Ses <span>œuvres</span></h2>
                 <div class="separateur"></div>
             </div>
         </div>
@@ -109,7 +109,7 @@
         <div class="profil-contact-grille">
 
             <div class="reveal">
-                <h2 class="section-titre">Contacter <span>l'artiste</span></h2>
+                <h2 class="section-titre" data-i18n="profil.contacter">Contacter <span>l'artiste</span></h2>
                 <div class="separateur"></div>
                 <p class="contact-desc">
                     Vous souhaitez collaborer avec cet artiste, 
@@ -130,10 +130,10 @@
 
             <div class="reveal reveal-delay-2">
                 <div class="contact-form">
-                    <input type="text"  id="msg-nom"     placeholder="Votre nom">
-                    <input type="email" id="msg-email"   placeholder="Votre email">
+                    <input type="text"  id="msg-nom"     data-i18n="contact.nom" placeholder="Votre nom">
+                    <input type="email" id="msg-email"   data-i18n="contact.email" placeholder="Votre email">
                     <input type="text"  id="msg-sujet"   placeholder="Sujet">
-                    <textarea           id="msg-message" placeholder="Votre message..."></textarea>
+                    <textarea           id="msg-message" data-i18n="contact.message" placeholder="Votre message..."></textarea>
                     <button class="btn-rouge" onclick="envoyerMessageArtiste()">
                         Envoyer le message
                     </button>
@@ -180,13 +180,13 @@
             <div class="footer-col-titre">Contact</div>
             <ul class="footer-liens">
                 <li><a href="#">📍 Bukavu, Sud-Kivu</a></li>
-                <li><a href="#">📧 contact@kivuculturehub.cd</a></li>
+                <li><a href="#">📧 kivuculturehub@gmail.com</a></li>
                 <li><a href="#">📞 +243 972212629</a></li>
             </ul>
         </div>
     </div>
     <div class="footer-bas">
-        © 2026 Kivu Culture Hub — Bukavu, Sud-Kivu, RDC
+        © 2026 Kivu Culture Hub — kivu RDC
     </div>
 </footer>
 

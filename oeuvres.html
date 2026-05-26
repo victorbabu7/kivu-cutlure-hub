@@ -15,12 +15,12 @@
     <div class="nav-inner">
         <a href="index.html" class="nav-logo">Kivu <span>Culture</span> Hub</a>
         <ul class="nav-liens">
-            <li><a href="artistes.html">Artistes</a></li>
-            <li><a href="oeuvres.html" class="actif">Œuvres</a></li>
-            <li><a href="actualites.html">Actualités</a></li>
+            <li><a href="artistes.html" data-i18n="nav.artistes">Artistes</a></li>
+            <li><a href="oeuvres.html" class="actif" data-i18n="nav.oeuvres">Œuvres</a></li>
+            <li><a href="actualites.html" data-i18n="nav.actualites">Actualités</a></li>
             <li><a href="index.html#annuaire">Annuaire</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-            <li><a href="admin.html" class="nav-btn">Admin</a></li>
+            <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+            <li><a href="connexion.html" class="nav-btn" data-i18n="nav_connecter">Se connecter</a></li>
         </ul>
         <button class="burger" id="burger">☰</button>
     </div>
@@ -36,7 +36,7 @@
                 <p class="page-breadcrumb">
                     <a href="index.html">Accueil</a> → Œuvres
                 </p>
-                <h1 class="page-titre">
+                <h1 class="page-titre" data-i18n="oeuvres.titre">
                     Nos <span>Œuvres</span>
                 </h1>
                 <p class="page-desc">
@@ -69,12 +69,12 @@
                 <input
                     type="text"
                     id="recherche-oeuvre"
-                    placeholder="Rechercher une œuvre..."
+                    data-i18n="artistes.recherche" placeholder="Rechercher une œuvre..."
                     class="filtre-input"
                 >
             </div>
             <div class="filtres-filieres">
-                <button class="filtre-btn actif" data-type="tous">Tous</button>
+                <button class="filtre-btn actif" data-type="tous" data-i18n="btn.tous">Tous</button>
                 <button class="filtre-btn" data-type="audio">🎵 Audio</button>
                 <button class="filtre-btn" data-type="video">🎬 Vidéo</button>
                 <button class="filtre-btn" data-type="peinture">🎨 Peinture</button>
@@ -93,7 +93,7 @@
 
         <div class="vide" id="vide" style="display:none;">
             <span style="font-size:3rem;">🎨</span>
-            <p>Aucune œuvre trouvée.</p>
+            <p data-i18n="artistes.vide">Aucune œuvre trouvée.</p>
         </div>
 
         <div class="oeuvres-grille-page" id="oeuvres-grille">
@@ -140,12 +140,12 @@
             <ul class="footer-liens">
                 <li><a href="#">📍 Bukavu, Sud-Kivu</a></li>
                 <li><a href="#">📧 contact@kivuculturehub.cd</a></li>
-                <li><a href="#">📞 +243 XXX XXX XXX</a></li>
+                <li><a href="#">📞 +243 972 212 629</a></li>
             </ul>
         </div>
     </div>
     <div class="footer-bas">
-        © 2026 Kivu Culture Hub — Bukavu, Sud-Kivu, RDC
+        © 2026 Kivu Culture Hub — kivu, RDC
     </div>
 </footer>
 

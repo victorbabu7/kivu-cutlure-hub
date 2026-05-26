@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion — Kivu Culture Hub</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="cx-topbar">
+    <a href="index.html" class="cx-logo">Kivu <span>Culture</span> Hub</a>
+    <div class="cx-topbar-right">
+        <a href="index.html" class="cx-retour">← Retour au site</a>
+    </div>
+</div>
+
+<div class="cx-body">
+    <div class="cx-wrap">
+
+        <div class="cx-tabs">
+            <button class="cx-tab actif" onclick="cxTab('connexion')">🔑 Se connecter</button>
+            <button class="cx-tab" onclick="cxTab('inscription')">✍️ Créer un compte</button>
+        </div>
+
+        <div class="cx-card">
+
+            <!-- ═══ PANEL : CONNEXION (admin + artiste unifié) ═══ -->
+            <div class="cx-panel actif" id="cx-panel-connexion">
+                <div class="cx-panel-icon">🔑</div>
+                <div class="cx-panel-titre">Se <span>Connecter</span></div>
+                <div class="cx-panel-sous">Espace artiste ou administration — connexion automatique</div>
+
+                <form onsubmit="connexionUnifiee(); return false;" autocomplete="on">
+                    <div class="cx-group">
+                        <label>Email ou nom d'utilisateur</label>
+                        <input type="text" id="cx-login-user" placeholder="votre@email.com" autocomplete="username">
+                    </div>
+                    <div class="cx-group">
+                        <label>Mot de passe</label>
+                        <input type="password" id="cx-login-pass" placeholder="••••••••" autocomplete="current-password">
+                    </div>
+                    <button type="submit" class="cx-btn" id="cx-login-btn">Se connecter →</button>
+                    <div class="cx-erreur" id="cx-login-erreur"></div>
+                </form>
+
+                <div class="cx-switch" style="margin-top:0.8rem;">
+                    <a onclick="afficherRecupUnifiee()" style="cursor:pointer;">🔑 Mot de passe oublié ?</a>
+                </div>
+
+                <!-- Récupération mot de passe -->
+                <div class="cx-recup-bloc" id="cx-recup-bloc" style="display:none;">
+                    <div class="cx-recup-titre">🔒 Récupération par mot de sécurité</div>
+                    <form onsubmit="return false;" autocomplete="off">
+                        <div class="cx-group">
+                            <label>Email du compte</label>
+                            <input type="email" id="cx-recup-email" placeholder="votre@email.com" autocomplete="email">
+                        </div>
+                        <div class="cx-group">
+                            <label>Mot de sécurité</label>
+                            <input type="text" id="cx-recup-mot-sec" placeholder="Votre mot de sécurité" autocomplete="off">
+                        </div>
+                        <button type="button" class="cx-btn" onclick="verifierRecupUnifiee()" style="margin-top:0;">Vérifier →</button>
+                        <div class="cx-recup-reset" id="cx-recup-reset-bloc" style="display:none;">
+                            <hr class="cx-sep">
+                            <div class="cx-group">
+                                <label>Nouveau mot de passe</label>
+                                <input type="password" id="cx-recup-new-pass" placeholder="Min. 6 caractères" autocomplete="new-password">
+                            </div>
+                            <button type="button" class="cx-btn" onclick="reinitialiserRecupUnifiee()">✅ Réinitialiser</button>
+                        </div>
+                    </form>
+                    <div class="cx-recup-msg" id="cx-recup-msg"></div>
+                </div>
+
+                <div class="cx-switch">
+                    <span>Pas encore de compte ?</span>
+                    <a onclick="cxTab('inscription')" style="cursor:pointer;">Créer un compte artiste</a>
+                </div>
+            </div>
+
+            <!-- ═══ PANEL : INSCRIPTION ═══ -->
+            <div class="cx-panel" id="cx-panel-inscription">
+                <div class="cx-panel-icon">✍️</div>
+                <div class="cx-panel-titre">Créer un compte <span>Artiste</span></div>
+                <div class="cx-panel-sous">Rejoignez la communauté culturelle du Kivu</div>
+
+                <div class="cx-info">
+                    ℹ️ Votre demande sera examinée par l'administrateur. Une fois approuvé(e), vous aurez accès à votre espace personnel.
+                </div>
+
+                <form id="insc-form" onsubmit="soumettreDemande(); return false;" autocomplete="on">
+                    <div class="cx-row">
+                        <div class="cx-group">
+                            <label>Prénom *</label>
+                            <input type="text" id="insc-prenom" placeholder="Votre prénom">
+                        </div>
+                        <div class="cx-group">
+                            <label>Nom *</label>
+                            <input type="text" id="insc-nom" placeholder="Votre nom">
+                        </div>
+                    </div>
+                    <div class="cx-group">
+                        <label>Email *</label>
+                        <input type="email" id="insc-email" placeholder="votre@email.com">
+                    </div>
+                    <div class="cx-group">
+                        <label>Téléphone *</label>
+                        <input type="tel" id="insc-tel" placeholder="+243 XXX XXX XXX">
+                    </div>
+                    <div class="cx-row">
+                        <div class="cx-group">
+                            <label>Date de naissance *</label>
+                            <input type="date" id="insc-naissance">
+                        </div>
+                        <div class="cx-group">
+                            <label>Adresse *</label>
+                            <input type="text" id="insc-adresse" placeholder="Quartier, ville">
+                        </div>
+                    </div>
+                    <div class="cx-group">
+                        <label>Filière artistique *</label>
+                        <select id="insc-filiere">
+                            <option value="">-- Choisir --</option>
+                            <option value="musique">🎵 Musique</option>
+                            <option value="danse">💃 Danse</option>
+                            <option value="theatre">🎭 Théâtre</option>
+                            <option value="peinture">🎨 Peinture</option>
+                            <option value="cinema">🎬 Cinéma</option>
+                            <option value="artisanat">🏺 Artisanat</option>
+                            <option value="sculpture">🗿 Sculpture</option>
+                        </select>
+                    </div>
+                    <div class="cx-group">
+                        <label>Description de votre activité *</label>
+                        <textarea id="insc-description" placeholder="Parlez brièvement de vous et de votre art..."></textarea>
+                    </div>
+                    <hr class="cx-sep">
+                    <div class="cx-group">
+                        <label>Mot de passe * (min. 6)</label>
+                        <input type="password" id="insc-pass" placeholder="••••••••" autocomplete="new-password">
+                    </div>
+                    <div class="cx-group">
+                        <label>Confirmer le mot de passe *</label>
+                        <input type="password" id="insc-pass2" placeholder="••••••••" autocomplete="new-password">
+                    </div>
+                    <div class="cx-group">
+                        <label>Mot de sécurité * <small style="color:#888;">(pour récupérer votre compte)</small></label>
+                        <input type="text" id="insc-mot-sec" placeholder="Ex: NomDeVotreMère, VilleNaissance...">
+                    </div>
+                    <button type="submit" class="cx-btn">Envoyer ma demande →</button>
+                    <div class="cx-erreur" id="insc-erreur"></div>
+                </form>
+
+                <div class="cx-success" id="insc-success" style="display:none;">
+                    <div style="font-size:2rem;margin-bottom:0.8rem;">✅</div>
+                    <strong>Demande envoyée avec succès !</strong><br><br>
+                    <p style="line-height:1.5;margin-bottom:1rem;">
+                        Votre demande est en attente d'approbation. L'analyse prend généralement entre <strong>5 à 30 minutes</strong>.
+                    </p>
+                    <p style="font-size:0.85rem;color:#555;line-height:1.5;margin-bottom:1.2rem;">
+                        💬 Pour accélérer la validation, envoyez un message au <strong>+243 972 212 629</strong>.
+                    </p>
+                    <a href="index.html" style="color:#27ae60;font-weight:700;text-decoration:none;">← Retour à l'accueil</a>
+                </div>
+
+                <div class="cx-switch">
+                    <span>Vous avez déjà un compte ?</span>
+                    <a onclick="cxTab('connexion')" style="cursor:pointer;">Se connecter</a>
+                </div>
+            </div>
+
+        </div><!-- /cx-card -->
+    </div><!-- /cx-wrap -->
+</div><!-- /cx-body -->
+
+<script type="module" src="js/main.js"></script>
+<script>
+function cxTab(nom) {
+    document.querySelectorAll('.cx-tab').forEach((t, i) => {
+        const tabs = ['connexion', 'inscription'];
+        t.classList.toggle('actif', tabs[i] === nom);
+    });
+    document.querySelectorAll('.cx-panel').forEach(p => p.classList.remove('actif'));
+    const panel = document.getElementById('cx-panel-' + nom);
+    if (panel) panel.classList.add('actif');
+    history.replaceState(null, '', '?tab=' + nom);
+}
+
+// Restore tab from URL
+(function() {
+    const p = new URLSearchParams(location.search).get('tab');
+    if (p && (p === 'connexion' || p === 'inscription')) cxTab(p);
+})();
+
+function afficherRecupUnifiee() {
+    const bloc = document.getElementById('cx-recup-bloc');
+    if (bloc) bloc.style.display = bloc.style.display === 'none' ? 'block' : 'none';
+}
+</script>
+</body>
+</html>

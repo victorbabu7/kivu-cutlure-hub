@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Espace Artiste — Kivu Culture Hub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { min-height:100vh; background:#f5f3ef; display:flex; flex-direction:column; }
+        .ea-topbar { background:#fff; border-bottom:1px solid #e8e4de; padding:1rem 5vw; display:flex; justify-content:space-between; align-items:center; }
+        .ea-topbar-logo { font-size:1.3rem; font-weight:800; color:#1a1a1a; text-decoration:none; }
+        .ea-topbar-logo span { color:#c0392b; }
+        .ea-topbar-right { display:flex; align-items:center; gap:1rem; }
+        .ea-nom-connecte { font-size:0.88rem; color:#555; font-weight:600; }
+        .ea-logout-btn { font-size:0.83rem; color:#c0392b; border:1px solid #c0392b; border-radius:6px; padding:0.35rem 0.8rem; cursor:pointer; background:none; font-weight:600; }
+        .ea-logout-btn:hover { background:#c0392b; color:#fff; }
+
+        /* LOGIN */
+        .ea-login-body { flex:1; display:flex; align-items:center; justify-content:center; padding:3rem 1rem; }
+        .ea-login-card { background:#fff; border-radius:16px; padding:2.5rem 2rem; box-shadow:0 4px 24px rgba(0,0,0,0.08); border:1px solid #e8e4de; width:100%; max-width:440px; }
+        .ea-login-icon { text-align:center; font-size:2.5rem; margin-bottom:0.5rem; }
+        .ea-login-titre { font-size:1.5rem; font-weight:800; text-align:center; color:#1a1a1a; margin-bottom:0.25rem; }
+        .ea-login-titre span { color:#c0392b; }
+        .ea-login-sous { text-align:center; color:#666; font-size:0.88rem; margin-bottom:1.8rem; }
+        .ea-group { margin-bottom:1rem; }
+        .ea-group label { display:block; font-size:0.83rem; font-weight:600; color:#333; margin-bottom:0.35rem; }
+        .ea-group input, .ea-group select, .ea-group textarea { width:100%; padding:0.72rem 1rem; border:1.5px solid #e0e0e0; border-radius:8px; font-size:0.95rem; outline:none; transition:border-color 0.2s; box-sizing:border-box; background:#fafafa; font-family:inherit; }
+        .ea-group input:focus, .ea-group select:focus, .ea-group textarea:focus { border-color:#c0392b; background:#fff; }
+        .ea-group textarea { min-height:90px; resize:vertical; }
+        .ea-btn { width:100%; padding:0.85rem; background:#c0392b; color:#fff; border:none; border-radius:8px; font-size:1rem; font-weight:700; cursor:pointer; margin-top:0.5rem; transition:background 0.2s; }
+        .ea-btn:hover:not(:disabled) { background:#a93226; }
+        .ea-btn:disabled { opacity:0.6; cursor:not-allowed; }
+        .ea-erreur { display:none; background:#fdecea; color:#c0392b; border:1px solid #f5c6c0; border-radius:8px; padding:0.6rem 1rem; font-size:0.85rem; margin-top:0.75rem; text-align:center; }
+        .ea-login-footer { text-align:center; margin-top:1rem; font-size:0.83rem; color:#666; }
+        .ea-login-footer a { color:#c0392b; text-decoration:none; font-weight:600; }
+
+        /* DASHBOARD */
+        .ea-dashboard { display:none; flex:1; flex-direction:column; }
+        .ea-tabs { display:flex; background:#fff; border-bottom:1px solid #e8e4de; padding:0 5vw; gap:0.5rem; overflow-x:auto; }
+        .ea-tab { padding:1rem 1.2rem; font-size:0.9rem; font-weight:600; color:#555; cursor:pointer; border-bottom:3px solid transparent; white-space:nowrap; }
+        .ea-tab.actif { color:#c0392b; border-bottom-color:#c0392b; }
+        .ea-panel { display:none; padding:2rem 5vw; max-width:900px; margin:0 auto; width:100%; }
+        .ea-panel.actif { display:block; }
+
+        /* Profil form */
+        .ea-section-titre { font-size:1.2rem; font-weight:800; color:#1a1a1a; margin-bottom:1.2rem; }
+        .ea-section-titre span { color:#c0392b; }
+        .ea-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+        .ea-form-card { background:#fff; border-radius:12px; padding:1.5rem; border:1px solid #e8e4de; margin-bottom:1.5rem; }
+        .ea-sep { border:none; border-top:1px solid #e8e4de; margin:1.2rem 0; }
+
+        /* Liste oeuvres */
+        .ea-oeuvre-item { background:#fff; border-radius:10px; padding:1rem 1.2rem; border:1px solid #e8e4de; margin-bottom:0.8rem; display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; }
+        .ea-oeuvre-nom { font-weight:700; color:#1a1a1a; font-size:0.95rem; }
+        .ea-oeuvre-meta { font-size:0.82rem; color:#888; margin-top:2px; }
+        .ea-oeuvre-actions { display:flex; gap:0.5rem; flex-shrink:0; }
+        .ea-btn-edit { padding:0.35rem 0.8rem; background:#f5f3ef; border:1px solid #e0e0e0; border-radius:6px; cursor:pointer; font-size:0.82rem; font-weight:600; }
+        .ea-btn-edit:hover { background:#e8e4de; }
+        .ea-btn-delete { padding:0.35rem 0.8rem; background:#fdecea; border:1px solid #f5c6c0; border-radius:6px; cursor:pointer; font-size:0.82rem; font-weight:600; color:#c0392b; }
+        .ea-btn-delete:hover { background:#c0392b; color:#fff; }
+
+        /* Toast */
+        .ea-toast { position:fixed; bottom:2rem; right:2rem; background:#1a1a1a; color:#fff; padding:0.8rem 1.5rem; border-radius:8px; font-size:0.9rem; font-weight:600; opacity:0; transition:opacity 0.3s; z-index:9999; pointer-events:none; }
+        .ea-toast.show { opacity:1; }
+
+        /* Statut */
+        .ea-statut-badge { display:inline-block; padding:0.3rem 0.8rem; border-radius:20px; font-size:0.8rem; font-weight:700; margin-bottom:0.5rem; }
+        .ea-statut-approuve { background:#eafaf1; color:#27ae60; }
+        .ea-statut-attente { background:#fef9e7; color:#f39c12; }
+
+        /* Profil preview */
+        .ea-profil-preview { background:#fff; border-radius:12px; padding:1.5rem; border:1px solid #e8e4de; display:flex; align-items:center; gap:1.5rem; margin-bottom:1.5rem; }
+        .ea-avatar { width:80px; height:80px; border-radius:50%; background:#c0392b; display:flex; align-items:center; justify-content:center; font-size:2rem; flex-shrink:0; overflow:hidden; }
+        .ea-avatar img { width:100%; height:100%; object-fit:cover; }
+        .ea-pub-btn { padding:0.6rem 1.2rem; background:#c0392b; color:#fff; border:none; border-radius:8px; font-size:0.88rem; font-weight:700; cursor:pointer; }
+        .ea-pub-btn:hover { background:#a93226; }
+        .ea-depub-btn { padding:0.6rem 1.2rem; background:#f5f3ef; color:#333; border:1px solid #ccc; border-radius:8px; font-size:0.88rem; font-weight:700; cursor:pointer; }
+
+        /* Upload toggle */
+        .upload-toggle { display:flex; gap:0.5rem; margin-bottom:0.5rem; }
+        .upload-toggle button { padding:0.35rem 0.8rem; border:1px solid #e0e0e0; border-radius:6px; cursor:pointer; font-size:0.82rem; background:#f5f3ef; }
+        .upload-toggle button.actif { background:#c0392b; color:#fff; border-color:#c0392b; }
+
+        .ea-vide { text-align:center; padding:3rem; color:#888; }
+        .ea-chargement { text-align:center; padding:2rem; color:#888; }
+
+        @media(max-width:600px) { .ea-row { grid-template-columns:1fr; } .ea-profil-preview { flex-direction:column; } }
+    </style>
+</head>
+<body>
+
+<div class="ea-topbar">
+    <a href="index.html" class="ea-topbar-logo">Kivu <span>Culture</span> Hub</a>
+    <a href="index.html" class="insc-topbar-retour">← Retour au site</a>
+    <div class="ea-topbar-right">
+        <span class="ea-nom-connecte" id="ea-nom-connecte"></span>
+        <button class="ea-logout-btn" onclick="eaLogout()">Déconnexion</button>
+    </div>
+</div>
+
+
+
+<!-- DASHBOARD -->
+<div class="ea-dashboard" id="ea-dashboard">
+    <div class="ea-tabs">
+        <div class="ea-tab actif" onclick="eaTab('profil')">👤 Mon Profil</div>
+        <div class="ea-tab" onclick="eaTab('oeuvres')">🖼 Mes Œuvres</div>
+        <div class="ea-tab" onclick="eaTab('ajouter-oeuvre')">➕ Ajouter une œuvre</div>
+    </div>
+
+    <!-- PANEL PROFIL -->
+    <div class="ea-panel actif" id="ea-panel-profil">
+        <div class="ea-profil-preview" id="ea-profil-preview">
+            <div class="ea-avatar" id="ea-avatar-preview">🎭</div>
+            <div>
+                <div style="font-weight:800;font-size:1.1rem;" id="ea-preview-nom">—</div>
+                <div style="color:#888;font-size:0.88rem;" id="ea-preview-filiere">—</div>
+                <div style="color:#888;font-size:0.83rem;margin-top:2px;" id="ea-preview-ville">—</div>
+                <div style="margin-top:0.8rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+                    <button class="ea-pub-btn" id="ea-pub-btn" onclick="publierProfil()">🌐 Publier mon profil</button>
+                    <button class="ea-depub-btn" id="ea-depub-btn" onclick="depublierProfil()" style="display:none;">⛔ Dépublier</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="ea-form-card">
+            <div class="ea-section-titre">Modifier mon <span>profil</span></div>
+            <div class="ea-row">
+                <div class="ea-group">
+                    <label>Nom complet *</label>
+                    <input type="text" id="ea-nom" placeholder="Votre nom d'artiste">
+                </div>
+                <div class="ea-group">
+                    <label>Filière *</label>
+                    <select id="ea-filiere">
+                        <option value="">-- Filière --</option>
+                        <option value="musique">🎵 Musique</option>
+                        <option value="danse">💃 Danse</option>
+                        <option value="theatre">🎭 Théâtre</option>
+                        <option value="peinture">🎨 Peinture</option>
+                        <option value="cinema">🎬 Cinéma</option>
+                        <option value="artisanat">🏺 Artisanat</option>
+                        <option value="sculpture">🗿 Sculpture</option>
+                    </select>
+                </div>
+            </div>
+            <div class="ea-row">
+                <div class="ea-group">
+                    <label>Ville</label>
+                    <input type="text" id="ea-ville" placeholder="Ex: Bukavu, Goma...">
+                </div>
+                <div class="ea-group">
+                    <label>Téléphone</label>
+                    <input type="tel" id="ea-tel" placeholder="+243 XXX XXX XXX">
+                </div>
+            </div>
+            <div class="ea-group">
+                <label>Email de contact (public)</label>
+                <input type="email" id="ea-email-contact" placeholder="votre@email.com">
+            </div>
+            <div class="ea-group">
+                <label>Biographie</label>
+                <textarea id="ea-bio" placeholder="Parlez de vous, votre parcours, votre style..."></textarea>
+            </div>
+            <div class="ea-group">
+                <label>Photo de profil (URL ou fichier)</label>
+                <div class="upload-toggle">
+                    <button class="actif" onclick="togglePhotoMode('url', this)">🔗 URL</button>
+                    <button onclick="togglePhotoMode('file', this)">📁 Fichier local</button>
+                </div>
+                <input type="text" id="ea-photo-url" placeholder="https://... lien vers votre photo">
+                <input type="file" id="ea-photo-file" accept="image/*" style="display:none;margin-top:0.5rem;"
+                 onchange="previewPhoto(this)">
+                <img id="ea-photo-preview" src="" style="display:none;max-width:100px;max-height:100px;margin-top:0.5rem;border-radius:8px;">
+            </div>
+            <button class="ea-btn" onclick="sauvegarderProfil()">💾 Enregistrer le profil</button>
+        </div>
+    </div>
+
+    <!-- PANEL MES OEUVRES -->
+    <div class="ea-panel" id="ea-panel-oeuvres">
+        <div class="ea-section-titre">Mes <span>Œuvres</span></div>
+        <div id="ea-liste-oeuvres"><div class="ea-chargement">Chargement...</div></div>
+    </div>
+
+    <!-- PANEL AJOUTER OEUVRE -->
+    <div class="ea-panel" id="ea-panel-ajouter-oeuvre">
+        <div class="ea-form-card">
+            <div class="ea-section-titre" id="ea-oeu-titre-form">Ajouter une <span>œuvre</span></div>
+            <div class="ea-row">
+                <div class="ea-group">
+                    <label>Titre de l'œuvre *</label>
+                    <input type="text" id="ea-oeu-titre" placeholder="Titre de votre œuvre">
+                </div>
+                <div class="ea-group">
+                    <label>Type *</label>
+                    <select id="ea-oeu-type">
+                        <option value="">-- Type --</option>
+                        <option value="audio">🎵 Audio</option>
+                        <option value="video">🎬 Vidéo</option>
+                        <option value="peinture">🎨 Peinture</option>
+                        <option value="sculpture">🗿 Sculpture</option>
+                        <option value="photo">📷 Photo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="ea-group">
+                <label>Année de création</label>
+                <input type="text" id="ea-oeu-annee" placeholder="Ex: 2024">
+            </div>
+            <div class="ea-group">
+                <label>Fichier / URL *</label>
+                <div class="upload-toggle">
+                    <button class="actif" onclick="toggleOeuMode('url', this)">🔗 Lien URL / YouTube</button>
+                    <button onclick="toggleOeuMode('file', this)">📁 Fichier local</button>
+                </div>
+                <input type="text" id="ea-oeu-url" placeholder="https://... ou lien YouTube">
+                <input type="file" id="ea-oeu-file" accept="image/*,audio/*,video/*" style="display:none;margin-top:0.5rem;" onchange="handleOeuFile(this)">
+            </div>
+            <div class="ea-group">
+                <label>Description</label>
+                <textarea id="ea-oeu-desc" placeholder="Description de l'œuvre..."></textarea>
+            </div>
+            <button class="ea-btn" id="ea-oeu-btn" onclick="eaAjouterOeuvre()">➕ Publier l'œuvre</button>
+        </div>
+    </div>
+</div>
+
+<div class="ea-toast" id="ea-toast"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

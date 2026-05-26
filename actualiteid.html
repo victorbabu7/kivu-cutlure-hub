@@ -13,12 +13,12 @@
     <div class="nav-inner">
         <a href="index.html" class="nav-logo">Kivu <span>Culture</span> Hub</a>
         <ul class="nav-liens">
-            <li><a href="artistes.html">Artistes</a></li>
-            <li><a href="oeuvres.html">Œuvres</a></li>
-            <li><a href="actualites.html" class="actif">Actualités</a></li>
+            <li><a href="artistes.html" data-i18n="nav.artistes">Artistes</a></li>
+            <li><a href="oeuvres.html" data-i18n="nav.oeuvres">Œuvres</a></li>
+            <li><a href="actualites.html" class="actif" data-i18n="nav.actualites">Actualités</a></li>
             <li><a href="index.html#annuaire">Annuaire</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-            <li><a href="admin.html" class="nav-btn">Admin</a></li>
+            <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+            <li><a href="connexion.html" class="nav-btn" data-i18n="nav_connecter">Se connecter</a></li>
         </ul>
         <button class="burger" id="burger">☰</button>
     </div>
@@ -57,36 +57,31 @@
                 <div class="news-detail-texte" id="news-texte">
                     Chargement...
                 </div>
-
-                <!-- Navigation entre articles -->
                 <div class="news-detail-nav">
-                    <a href="actualites.html" class="btn-contour">← Retour aux actualités</a>
+                 <a href="actualites.html" class="btn-contour" data-i18n="news.voir-toutes">← Retour aux actualités</a>
                 </div>
             </div>
 
-            <!-- Sidebar -->
+           
             <aside class="news-detail-sidebar">
                 <div class="sidebar-bloc">
-                    <div class="sidebar-titre">Autres actualités</div>
-                    <div id="autres-news">
-                
-                        <!-- rempli par JS -->
-                    </div>
+                 <div class="sidebar-titre">Autres actualités</div>
+                <div id="autres-news">
                 </div>
+            </div>
             </aside>
-
         </div>
     </div>
 </section>
 
-<!-- FOOTER -->
+
 <footer class="footer">
     <div class="footer-grille">
         <div>
-            <div class="footer-logo">Kivu <span>Culture</span> Hub</div>
-            <p class="footer-desc">
+          <div class="footer-logo">Kivu <span>Culture</span> Hub</div>
+       <p class="footer-desc">
                 La plateforme de référence pour promouvoir
-                les artistes et les œuvres culturelles
+         les artistes et les œuvres culturelles
                 de Bukavu, Sud-Kivu, RDC.
             </p>
         </div>
@@ -118,7 +113,7 @@
         </div>
     </div>
     <div class="footer-bas">
-        © 2026 Kivu Culture Hub — Bukavu, Sud-Kivu, RDC
+        © 2026 Kivu Culture Hub — kivu , RDC
     </div>
 </footer>
 

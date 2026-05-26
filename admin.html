@@ -30,6 +30,7 @@
     <div class="admin-tab" onclick="adminTab('news')">📰 Actualités</div>
     <div class="admin-tab" onclick="adminTab('messages')">✉️ Messages</div>
     <div class="admin-tab" onclick="adminTab('toplikes')">🏆 Top Likes</div>
+    <div class="admin-tab" onclick="adminTab('demandes')" id="tab-demandes">📋 Demandes <span id="badge-demandes" style="background:#c0392b;color:#fff;border-radius:10px;padding:1px 7px;font-size:0.75rem;margin-left:4px;display:none;"></span></div>
     <div class="admin-tab" onclick="adminTab('admins-comptes')" id="tab-admins-comptes">👥 Admins</div>
     <div class="admin-tab" onclick="adminTab('mon-compte')">👤 Mon compte</div>
 </div>
@@ -324,6 +325,12 @@
 <!-- ════════════════════════════════════
      PANEL — GESTION DES ADMINS
 ════════════════════════════════════ -->
+<div class="admin-panel" id="panel-demandes">
+    <div class="admin-section-titre">📋 Demandes d'accès artistes</div>
+    <div class="admin-count" id="count-demandes"></div>
+    <div id="liste-demandes"><div class="admin-chargement">Chargement...</div></div>
+</div>
+
 <div class="admin-panel" id="panel-admins-comptes">
     <div class="admin-panel-titre">👥 Gestion des comptes administrateurs</div>
     <p class="admin-panel-desc">Créez des comptes admins et gérez les accès. Seul le Super Admin peut accéder à cette section.</p>
@@ -464,18 +471,7 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const origArt = window.adminAjouterArtiste;
-    if (origArt) window.adminAjouterArtiste = async function() {
-        const p = document.getElementById('art-photo');
-        if (p && p.dataset.fileData) p.value = p.dataset.fileData;
-        return origArt();
-    };
-    const origOeu = window.adminAjouterOeuvre;
-    if (origOeu) window.adminAjouterOeuvre = async function() {
-        const p = document.getElementById('oeu-url');
-        if (p && p.dataset.fileData) p.value = p.dataset.fileData;
-        return origOeu();
-    };
+    // fileData injection is now handled directly in main.js
 });
 </script>
 
