@@ -1399,6 +1399,11 @@ button { cursor: pointer; font-family: var(--font-corps); }
     line-height: 1.6;
     font-weight: 300;
     margin-bottom: 1.2rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .artiste-lien-page {

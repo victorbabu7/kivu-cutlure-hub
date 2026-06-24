@@ -84,6 +84,13 @@
         .ea-vide { text-align:center; padding:3rem; color:#888; }
         .ea-chargement { text-align:center; padding:2rem; color:#888; }
 
+        /* Supprimer le compte */
+        .ea-danger-zone { background:#fff8f7; border:1.5px solid #f5c6c0; border-radius:12px; padding:1.2rem 1.5rem; margin-top:1.5rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; }
+        .ea-danger-zone-info { font-size:0.88rem; color:#555; }
+        .ea-danger-zone-info strong { display:block; color:#c0392b; font-size:0.95rem; margin-bottom:0.2rem; }
+        .ea-btn-supprimer-compte { padding:0.6rem 1.2rem; background:#fff; color:#c0392b; border:1.5px solid #c0392b; border-radius:8px; font-size:0.88rem; font-weight:700; cursor:pointer; transition:all 0.2s; white-space:nowrap; }
+        .ea-btn-supprimer-compte:hover { background:#c0392b; color:#fff; }
+
         @media(max-width:600px) { .ea-row { grid-template-columns:1fr; } .ea-profil-preview { flex-direction:column; } }
     </style>
 </head>
@@ -91,7 +98,7 @@
 
 <div class="ea-topbar">
     <a href="index.html" class="ea-topbar-logo">Kivu <span>Culture</span> Hub</a>
-    <a href="index.html" class="insc-topbar-retour">← Retour au site</a>
+    <a href="index.html" class="insc-topbar-retour"></a>
     <div class="ea-topbar-right">
         <span class="ea-nom-connecte" id="ea-nom-connecte"></span>
         <button class="ea-logout-btn" onclick="eaLogout()">Déconnexion</button>
@@ -174,6 +181,15 @@
                 <img id="ea-photo-preview" src="" style="display:none;max-width:100px;max-height:100px;margin-top:0.5rem;border-radius:8px;">
             </div>
             <button class="ea-btn" onclick="sauvegarderProfil()">💾 Enregistrer le profil</button>
+        </div>
+
+        <!-- ZONE DANGER -->
+        <div class="ea-danger-zone">
+            <div class="ea-danger-zone-info">
+                <strong>🗑 Supprimer mon compte</strong>
+                Cette action est irréversible. Votre compte, votre profil public et toutes vos œuvres seront définitivement supprimés.
+            </div>
+            <button class="ea-btn-supprimer-compte" onclick="supprimerMonCompte()">Supprimer mon compte</button>
         </div>
     </div>
 
